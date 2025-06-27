@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: opacity 0.5s ease-in-out;
+            max-width: 600px;
+            width: 90%;
+        }
+        .verification-image {
+            max-width: 200px; /* Increased size for single image */
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out;
+        }
+        .verification-image:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .buttons button {
+            background-color: #28a745;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 0 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .buttons button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .buttons button.no {
+            background-color: #dc3545;
+        }
+        .buttons button.no:hover {
+            background-color: #c82333;
+        }
+        .full-screen-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.8em;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s;
+            z-index: 1000;
+        }
+        .full-screen-message.show {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+        .full-screen-message.error {
+            background-color: rgba(34, 49, 63, 0.95);
+        }
+        .full-screen-message.success {
+            background-color: rgba(40, 167, 69, 0.95);
+        }
+        .full-screen-message .icon {
+            font-size: 5em;
+            margin-bottom: 25px;
+        }
+        .full-screen-message .text {
+            font-size: 0.9em;
+            margin-top: 15px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <img src="https://th.bing.com/th/id/OIP.yTFthDScPIOQkBpquLSRJAHaEK?r=0&rs=1&pid=ImgDetMain&cb=idpwebpc2" alt="Palestine Solidarity" class="verification-image">
+        <h1>Are you standing with Palestine?</h1>
+        <div class="buttons">
+            <button id="yesButton">Yes</button>
+            <button id="noButton" class="no">No</button>
+        </div>
+    </div>
+    <div id="successMessageFullScreen" class="full-screen-message success">
+        <span class="icon">&#10004;</span>
+        <span class="text">Verification Successful!</span>
+    </div>
+    <div id="errorMessageFullScreen" class="full-screen-message error">
+        <span class="text">Sorry, You are not a human! No one except humans is allowed to view the Bio-data.</span>
+    </div>
+    <script>
+        document.getElementById('yesButton').addEventListener('click', function() {
+            document.getElementById('errorMessageFullScreen').classList.remove('show');
+            document.getElementById('mainContainer').style.opacity = '0';
+            document.getElementById('mainContainer').style.pointerEvents = 'none';
+            setTimeout(() => {
+                document.getElementById('mainContainer').style.display = 'none';
+                document.getElementById('successMessageFullScreen').classList.add('show');
+                setTimeout(function() {
+                    window.location.href = 'home.html';
+                }, 1500);
+            }, 500);
+        });
+        document.getElementById('noButton').addEventListener('click', function() {
+            document.getElementById('successMessageFullScreen').classList.remove('show');
+            document.getElementById('mainContainer').style.opacity = '0';
+            document.getElementById('mainContainer').style.pointerEvents = 'none';
+            setTimeout(() => {
+                document.getElementById('mainContainer').style.display = 'none';
+                document.getElementById('errorMessageFullScreen').classList.add('show');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
