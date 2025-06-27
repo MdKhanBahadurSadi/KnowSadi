@@ -9,7 +9,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root{--primary-color:#3b82f6;--secondary-color:#60a5fa;--accent-color:#fde047;--text-color-light:#e2e8f0;--text-color-dark:#1a202c;--bg-dark:#1e293b;--bg-light:#334155;--card-bg:#475569;}
+        :root{
+            --primary-color:#3b82f6;
+            --secondary-color:#60a5fa;
+            --accent-color:#fde047;
+            --text-color-light:#e2e8f0;
+            --text-color-dark:#1a202c;
+            --bg-dark:#1e293b;
+            --bg-light:#334155;
+            --card-bg:#475569;
+            --project-nwu-bg: rgba(79, 70, 229, 0.8);
+            --project-nwu-heading: #fde047;
+            --project-nwu-border: #60a5fa;
+            --project-nwu-strong: #93c5fd;
+            --project-helo-bg: rgba(109, 40, 217, 0.8);
+            --project-helo-heading: #67e8f9;
+            --project-helo-border: #c084fc;
+            --project-helo-strong: #d8b4fe;
+            --project-hydrovigil-bg: rgba(30, 27, 76, 0.8);
+            --project-hydrovigil-heading: #bef264;
+            --project-hydrovigil-border: #4ade80;
+            --project-hydrovigil-strong: #bef264;
+            --project-hydrovigil-app-bg: rgba(13, 148, 136, 0.8);
+            --project-hydrovigil-app-heading: #fbbf24;
+            --project-hydrovigil-app-border: #facc15;
+            --project-hydrovigil-app-strong: #fbbf24;
+            --project-ghorbondhu-bg: rgba(185, 28, 28, 0.8);
+            --project-ghorbondhu-heading: #fde047;
+            --project-ghorbondhu-border: #f87171;
+            --project-ghorbondhu-strong: #fca5a5;
+            --project-ghorbondhu-web-bg: rgba(146, 64, 14, 0.8);
+            --project-ghorbondhu-web-heading: #93c5fd;
+            --project-ghorbondhu-web-border: #facc15;
+            --project-ghorbondhu-web-strong: #93c5fd;
+        }
         html{font-family:'Inter',sans-serif;scroll-behavior:smooth;}
         body{background-color:var(--bg-dark);color:var(--text-color-light);line-height:1.6;overflow-x:hidden;@apply bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen flex flex-col;position:relative;z-index:0;}
         #background-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;opacity:0.8;filter:blur(0.5px);}
@@ -51,6 +84,30 @@
         .project-image-grid img:hover {
             transform: scale(1.02);
         }
+
+        #project-nwu-my-class { background-color: var(--project-nwu-bg); }
+        #project-nwu-my-class h2 { color: var(--project-nwu-heading); border-color: var(--project-nwu-border); }
+        #project-nwu-my-class strong { color: var(--project-nwu-strong); }
+
+        #project-helo-apa { background-color: var(--project-helo-bg); }
+        #project-helo-apa h2 { color: var(--project-helo-heading); border-color: var(--project-helo-border); }
+        #project-helo-apa strong { color: var(--project-helo-strong); }
+
+        #project-hydrovigil { background-color: var(--project-hydrovigil-bg); }
+        #project-hydrovigil h2 { color: var(--project-hydrovigil-heading); border-color: var(--project-hydrovigil-border); }
+        #project-hydrovigil strong { color: var(--project-hydrovigil-strong); }
+
+        #project-hydrovigil-app { background-color: var(--project-hydrovigil-app-bg); }
+        #project-hydrovigil-app h2 { color: var(--project-hydrovigil-app-heading); border-color: var(--project-hydrovigil-app-border); }
+        #project-hydrovigil-app strong { color: var(--project-hydrovigil-app-strong); }
+
+        #project-ghorbondhu { background-color: var(--project-ghorbondhu-bg); }
+        #project-ghorbondhu h2 { color: var(--project-ghorbondhu-heading); border-color: var(--project-ghorbondhu-border); }
+        #project-ghorbondhu strong { color: var(--project-ghorbondhu-strong); }
+
+        #project-ghorbondhu-website { background-color: var(--project-ghorbondhu-web-bg); }
+        #project-ghorbondhu-website h2 { color: var(--project-ghorbondhu-web-heading); border-color: var(--project-ghorbondhu-web-border); }
+        #project-ghorbondhu-website strong { color: var(--project-ghorbondhu-web-strong); }
     </style>
 </head>
 <body>
@@ -87,49 +144,36 @@
         </header>
 
         <main>
-            <section id="project-nwu-my-class" class="card bg-indigo-700 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-yellow-300 mb-6 border-b-2 border-blue-400 pb-3">NWU My Class</h2>
+            <section id="project-nwu-my-class" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">NWU My Class</h2>
                 <div class="space-y-4 text-lg text-white">
-                    <p><strong class="text-blue-300">Project Idea:</strong> Md Mahmudul Haque</p>
-                    <p><strong class="text-blue-300">Project Type:</strong> Class Management Android App</p>
-                    <p><strong class="text-blue-300">Project Purpose:</strong> Software Development (CSE-2200) Course</p>
-                    <p><strong class="text-blue-300">Technology Used:</strong> Java</p>
-                    <p><strong class="text-blue-300">Limitations:</strong> No Database</p>
-                </div>
-                <div class="project-image-grid">
-                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+1" alt="NWU My Class screenshot 1">
-                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+2" alt="NWU My Class screenshot 2">
-                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+3" alt="NWU My Class screenshot 3">
-                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+4" alt="NWU My Class screenshot 4">
-                    <!-- Add more images here (up to 6 total) -->
+                    <p><strong class="font-bold">Project Idea:</strong> Md Mahmudul Haque</p>
+                    <p><strong class="font-bold">Project Type:</strong> Class Management Android App</p>
+                    <p><strong class="font-bold">Project Purpose:</strong> Software Development (CSE-2200) Course</p>
+                    <p><strong class="font-bold">Technology Used:</strong> Java</p>
+                    <p><strong class="font-bold">Limitations:</strong> No Database</p>
                 </div>
             </section>
 
-            <section id="project-helo-apa" class="card bg-purple-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-cyan-300 mb-6 border-b-2 border-purple-400 pb-3">Helo Apa</h2>
+            <section id="project-helo-apa" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">Helo Apa</h2>
                 <div class="space-y-4 text-lg text-white">
-                    <p><strong class="text-purple-300">Project Idea:</strong> Sheikh Hasina</p>
-                    <p><strong class="text-purple-300">Project Type:</strong> Audio Calling App</p>
-                    <p><strong class="text-purple-300">Project Purpose:</strong> Practice</p>
-                    <p><strong class="text-purple-300">Technology Used:</strong> Java, Firebase</p>
-                    <p><strong class="text-purple-300">Limitations:</strong> Database is too small</p>
-                </div>
-                <div class="project-image-grid">
-                    <img src="https://placehold.co/300x200/8e44ad/FFFFFF?text=Helo+Apa+1" alt="Helo Apa screenshot 1">
-                    <img src="https://placehold.co/300x200/8e44ad/FFFFFF?text=Helo+Apa+2" alt="Helo Apa screenshot 2">
-                    <img src="https://placehold.co/300x200/8e44ad/FFFFFF?text=Helo+Apa+3" alt="Helo Apa screenshot 3">
-                    <!-- Add more images here (up to 6 total) -->
+                    <p><strong class="font-bold">Project Idea:</strong> Sheikh Hasina</p>
+                    <p><strong class="font-bold">Project Type:</strong> Audio Calling App</p>
+                    <p><strong class="font-bold">Project Purpose:</strong> Practice</p>
+                    <p><strong class="font-bold">Technology Used:</strong> Java, Firebase</p>
+                    <p><strong class="font-bold">Limitations:</strong> Database is too small</p>
                 </div>
             </section>
 
-            <section id="project-hydrovigil" class="card bg-blue-900 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-lime-300 mb-6 border-b-2 border-green-400 pb-3">HydroVigil</h2>
+            <section id="project-hydrovigil" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">HydroVigil</h2>
                 <div class="space-y-4 text-lg text-white">
-                    <p><strong class="text-lime-300">Project Idea:</strong> Md Khan Bahadur Sadi</p>
-                    <p><strong class="text-lime-300">Project Type:</strong> IoT-based Water Level Monitoring System</p>
-                    <p><strong class="text-lime-300">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
-                    <p><strong class="text-lime-300">Technology Used:</strong> ESP8266, HC-SR04 Ultrasonic Sensor</p>
-                    <p><strong class="text-lime-300">Limitations:</strong></p>
+                    <p><strong class="font-bold">Project Idea:</strong> Md Khan Bahadur Sadi</p>
+                    <p><strong class="font-bold">Project Type:</strong> IoT-based Water Level Monitoring System</p>
+                    <p><strong class="font-bold">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
+                    <p><strong class="font-bold">Technology Used:</strong> ESP8266, HC-SR04 Ultrasonic Sensor</p>
+                    <p><strong class="font-bold">Limitations:</strong></p>
                     <ul class="list-disc pl-5">
                         <li>Sensor Accuracy: The HC-SR04 ultrasonic sensor may not provide accurate readings in environments with turbulence or foam on the water surface.</li>
                         <li>Limited Range: The ultrasonic sensor has a limited measuring range (typically 2 cm to 400 cm), which may not be suitable for monitoring very deep or large water reservoirs.</li>
@@ -142,72 +186,42 @@
                         <li>Interference Issues: Nearby objects or obstacles may cause signal reflections, leading to inaccurate distance measurements.</li>
                     </ul>
                 </div>
-                <div class="project-image-grid">
-                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+1" alt="HydroVigil screenshot 1">
-                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+2" alt="HydroVigil screenshot 2">
-                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+3" alt="HydroVigil screenshot 3">
-                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+4" alt="HydroVigil screenshot 4">
-                    <!-- Add more images here (up to 6 total) -->
-                </div>
             </section>
 
-            <section id="project-hydrovigil-app" class="card bg-teal-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-amber-300 mb-6 border-b-2 border-yellow-400 pb-3">HydroVigil App</h2>
+            <section id="project-hydrovigil-app" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">HydroVigil App</h2>
                 <div class="space-y-4 text-lg text-white">
-                    <p><strong class="text-amber-300">Project Idea:</strong> Khan Bahadur Sadi</p>
-                    <p><strong class="text-amber-300">Project Type:</strong> IoT-based Water Level Monitoring System Data Showing App</p>
-                    <p><strong class="text-amber-300">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
-                    <p><strong class="text-amber-300">Technology Used:</strong> Java, Firebase</p>
-                    <p><strong class="text-amber-300">Limitations:</strong> Totally IoT-based</p>
-                </div>
-                <div class="project-image-grid">
-                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+1" alt="HydroVigil App screenshot 1">
-                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+2" alt="HydroVigil App screenshot 2">
-                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+3" alt="HydroVigil App screenshot 3">
-                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+4" alt="HydroVigil App screenshot 4">
-                    <!-- Add more images here (up to 6 total) -->
+                    <p><strong class="font-bold">Project Idea:</strong> Khan Bahadur Sadi</p>
+                    <p><strong class="font-bold">Project Type:</strong> IoT-based Water Level Monitoring System Data Showing App</p>
+                    <p><strong class="font-bold">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
+                    <p><strong class="font-bold">Technology Used:</strong> Java, Firebase</p>
+                    <p><strong class="font-bold">Limitations:</strong> Totally IoT-based</p>
                 </div>
             </section>
 
-            <section id="project-ghorbondhu" class="card bg-red-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-yellow-300 mb-6 border-b-2 border-red-400 pb-3">GhorBondhu – A Local Service Booking App for Your Neighborhood</h2>
+            <section id="project-ghorbondhu" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">GhorBondhu – A Local Service Booking App for Your Neighborhood</h2>
                 <div class="space-y-4 text-lg text-white">
                     <p>"GhorBondhu" is a user-friendly mobile application created to connect people within a community by making local service booking easier, faster, and more organized. Designed and developed by Muhammad Khan Bahadur Sadi, this app helps users both post and request household or personal services — like electricians, tutors, cleaners, or any skilled help — directly from their smartphones.</p>
-                    <p><strong class="text-red-300">Secure Login System:</strong> Users can register or log in using their email and password. Email verification is implemented for extra security, ensuring a trusted user base.</p>
-                    <p><strong class="text-red-300">Dynamic Newsfeed:</strong> After logging in, users are greeted with a real-time newsfeed where they can browse available services posted by others. Each service post includes details like service title, description, price, and the poster’s contact info.</p>
-                    <p><strong class="text-red-300">Service Posting Form:</strong> Any user can fill out a simple form to post a service they’re offering — turning the app into a platform for earning and networking within the local area.</p>
-                    <p><strong class="text-red-300">Order Now Feature:</strong> Interested users can click on the “Order Now” button to request a service instantly, making the process smooth and interactive.</p>
-                    <p><strong class="text-red-300">Built using:</strong> Flutter and connected to Firebase, the MVP version of GhorBondhu already includes a splash screen, authentication system, verified sign-ups, and live data loading from Firebase. The app reflects your vision of making local service-sharing simple and trusted — just like a “home-friend” (Ghor Bondhu) would be.</p>
-                </div>
-                <div class="project-image-grid">
-                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+1" alt="GhorBondhu App screenshot 1">
-                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+2" alt="GhorBondhu App screenshot 2">
-                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+3" alt="GhorBondhu App screenshot 3">
-                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+4" alt="GhorBondhu App screenshot 4">
-                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+5" alt="GhorBondhu App screenshot 5">
-                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+6" alt="GhorBondhu App screenshot 6">
+                    <p><strong class="font-bold">Secure Login System:</strong> Users can register or log in using their email and password. Email verification is implemented for extra security, ensuring a trusted user base.</p>
+                    <p><strong class="font-bold">Dynamic Newsfeed:</strong> After logging in, users are greeted with a real-time newsfeed where they can browse available services posted by others. Each service post includes details like service title, description, price, and the poster’s contact info.</p>
+                    <p><strong class="font-bold">Service Posting Form:</strong> Any user can fill out a simple form to post a service they’re offering — turning the app into a platform for earning and networking within the local area.</p>
+                    <p><strong class="font-bold">Order Now Feature:</strong> Interested users can click on the “Order Now” button to request a service instantly, making the process smooth and interactive.</p>
+                    <p><strong class="font-bold">Built using:</strong> Flutter and connected to Firebase, the MVP version of GhorBondhu already includes a splash screen, authentication system, verified sign-ups, and live data loading from Firebase. The app reflects your vision of making local service-sharing simple and trusted — just like a “home-friend” (Ghor Bondhu) would be.</p>
                 </div>
             </section>
 
-            <section id="project-ghorbondhu-website" class="card bg-yellow-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-blue-300 mb-6 border-b-2 border-yellow-400 pb-3">GhorBondhu Website – The Digital Platform for Local Services</h2>
+            <section id="project-ghorbondhu-website" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">GhorBondhu Website – The Digital Platform for Local Services</h2>
                 <div class="space-y-4 text-lg text-white">
                     <p>The GhorBondhu Website is a modern, user-friendly web platform designed to make local service exchange simple, fast, and reliable. It is the web version of the GhorBondhu mobile app, aimed at helping people find or offer everyday services within their community — all from the comfort of their home.</p>
-                    <p><strong class="text-blue-300">Email Login with Verification:</strong> Users can sign up or log in using their email and password. A verification system is in place to ensure user authenticity and security.</p>
-                    <p><strong class="text-blue-300">Live Newsfeed of Services:</strong> The homepage features a real-time newsfeed where users can browse service posts submitted by others. Each post includes details like service name, description, price, and an option to order.</p>
-                    <p><strong class="text-blue-300">Service Posting Form:</strong> Any user can easily fill out a form to post a service they are offering — making it ideal for freelancers, students, or local workers to showcase their skills.</p>
-                    <p><strong class="text-blue-300">“Order Now” Button:</strong> Each service post includes an "Order Now" button that allows interested users to directly place a request for the service.</p>
-                    <p><strong class="text-blue-300">Responsive Web Design:</strong> Built using HTML, CSS, and PHP, the website is fully responsive — meaning it works smoothly on both desktop and mobile devices.</p>
+                    <p><strong class="font-bold">Email Login with Verification:</strong> Users can sign up or log in using their email and password. A verification system is in place to ensure user authenticity and security.</p>
+                    <p><strong class="font-bold">Live Newsfeed of Services:</strong> The homepage features a real-time newsfeed where users can browse service posts submitted by others. Each post includes details like service name, description, price, and an option to order.</p>
+                    <p><strong class="font-bold">Service Posting Form:</strong> Any user can easily fill out a form to post a service they are offering — making it ideal for freelancers, students, or local workers to showcase their skills.</p>
+                    <p><strong class="font-bold">“Order Now” Button:</strong> Each service post includes an "Order Now" button that allows interested users to directly place a request for the service.</p>
+                    <p><strong class="font-bold">Responsive Web Design:</strong> Built using HTML, CSS, and PHP, the website is fully responsive — meaning it works smoothly on both desktop and mobile devices.</p>
                     <p class="text-yellow-300 font-semibold">✅ GhorBondhu – Where your next helping hand might be just a neighbor away.</p>
                     <p>This website is a step toward building a trustworthy, community-driven digital network where people can support and rely on each other for everyday needs.</p>
-                </div>
-                <div class="project-image-grid">
-                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+1" alt="GhorBondhu Website screenshot 1">
-                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+2" alt="GhorBondhu Website screenshot 2">
-                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+3" alt="GhorBondhu Website screenshot 3">
-                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+4" alt="GhorBondhu Website screenshot 4">
-                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+5" alt="GhorBondhu Website screenshot 5">
-                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+6" alt="GhorBondhu Website screenshot 6">
                 </div>
             </section>
         </main>
@@ -299,15 +313,9 @@
             let particles = [];
             const numParticles = 35;
             const particleColors = [
-                'rgba(255, 0, 0, 0.9)',
-                'rgba(0, 255, 0, 0.9)',
-                'rgba(0, 0, 255, 0.9)',
-                'rgba(255, 255, 0, 0.9)',
-                'rgba(0, 255, 255, 0.9)',
-                'rgba(255, 0, 255, 0.9)',
-                'rgba(255, 128, 0, 0.9)',
-                'rgba(128, 0, 255, 0.9)',
-                'rgba(0, 128, 0, 0.9)'
+                'rgba(255, 0, 0, 0.9)', 'rgba(0, 255, 0, 0.9)', 'rgba(0, 0, 255, 0.9)',
+                'rgba(255, 255, 0, 0.9)', 'rgba(0, 255, 255, 0.9)', 'rgba(255, 0, 255, 0.9)',
+                'rgba(255, 128, 0, 0.9)', 'rgba(128, 0, 255, 0.9)', 'rgba(0, 128, 0, 0.9)'
             ];
 
             function setCanvasSize() {
@@ -320,7 +328,9 @@
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
                     this.radius = Math.random() * 1.5 + 0.5;
-                    this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                    this.baseColor = particleColors[Math.floor(Math.random() * particleColors.length)];
+                    const rgbaMatch = this.baseColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+                    this.rgbColor = `rgb(${rgbaMatch[1]}, ${rgbaMatch[2]}, ${rgbaMatch[3]})`;
                     this.velocity = {
                         x: (Math.random() - 0.5) * 0.3,
                         y: (Math.random() - 0.5) * 0.3
@@ -330,9 +340,9 @@
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
+                    ctx.fillStyle = this.baseColor;
                     ctx.shadowBlur = this.radius * 1;
-                    ctx.shadowColor = this.color;
+                    ctx.shadowColor = this.baseColor;
                     ctx.fill();
                     ctx.closePath();
                 }
@@ -341,17 +351,10 @@
                     this.x += this.velocity.x;
                     this.y += this.velocity.y;
 
-                    if (this.x < 0 - this.radius) this.x = canvas.width + this.radius;
-                    if (this.x > canvas.width + this.radius) this.x = 0 - this.radius;
-                    if (this.y < 0 - this.radius) this.y = canvas.height + this.radius;
-                    if (this.y > canvas.height + this.radius) this.y = 0 - this.radius;
-                }
-            }
-
-            function initParticles() {
-                particles = [];
-                for (let i = 0; i < numParticles; i++) {
-                    particles.push(new Particle());
+                    if (this.x < -this.radius) this.x = canvas.width + this.radius;
+                    if (this.x > canvas.width + this.radius) this.x = -this.radius;
+                    if (this.y < -this.radius) this.y = canvas.height + this.radius;
+                    if (this.y > canvas.height + this.radius) this.y = -this.radius;
                 }
             }
 
@@ -364,9 +367,11 @@
                         const distance = Math.sqrt(dx * dx + dy * dy);
 
                         if (distance < maxDistance) {
+                            const opacity = (1 - distance / maxDistance) * 0.6;
+                            
                             const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
-                            gradient.addColorStop(0, particles[a].color.replace('0.9', `${(1 - distance / maxDistance) * 0.6}`));
-                            gradient.addColorStop(1, particles[b].color.replace('0.9', `${(1 - distance / maxDistance) * 0.6}`));
+                            gradient.addColorStop(0, `${particles[a].rgbColor}, ${opacity})`);
+                            gradient.addColorStop(1, `${particles[b].rgbColor}, ${opacity})`);
 
                             ctx.strokeStyle = gradient;
                             ctx.lineWidth = 0.8;
@@ -390,14 +395,23 @@
                 }
             }
 
+            function debounce(func, delay) {
+                let timeout;
+                return function(...args) {
+                    const context = this;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), delay);
+                };
+            }
+
             setCanvasSize();
             initParticles();
             animate();
 
-            window.addEventListener('resize', () => {
+            window.addEventListener('resize', debounce(() => {
                 setCanvasSize();
                 initParticles();
-            });
+            }, 250));
         };
     </script>
 </body>
