@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Khan Bahadur Sadi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root{--primary-color:#3b82f6;--secondary-color:#60a5fa;--accent-color:#fde047;--text-color-light:#e2e8f0;--text-color-dark:#1a202c;--bg-dark:#1e293b;--bg-light:#334155;--card-bg:#475569;}
+        html{font-family:'Inter',sans-serif;scroll-behavior:smooth;}
+        body{background-color:var(--bg-dark);color:var(--text-color-light);line-height:1.6;overflow-x:hidden;@apply bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen flex flex-col;position:relative;z-index:0;}
+        #background-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;opacity:0.8;filter:blur(0.5px);}
+        .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes slideInLeft{from{opacity:0;transform:translateX(-50px);}to{opacity:1;transform:translateX(0);}}
+        @keyframes pulseBorder{0%{box-shadow:0 0 0 0 rgba(96,165,250,0.4);}70%{box-shadow:0 0 0 10px rgba(96,165,250,0);}100%{box-shadow:0 0 0 0 rgba(96,165,250,0);}}
+        @keyframes scaleIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        .animate-fadeIn{animation:fadeIn 1s ease-out forwards;}
+        .animate-slideInLeft{animation:slideInLeft 0.8s ease-out forwards;}
+        .animate-pulseBorder{animation:pulseBorder 2s infinite;}
+        .animate-scaleIn{animation:scaleIn 0.7s ease-out forwards;}
+        .animate-slideUp{animation:slideUp 0.6s ease-out forwards;}
+        nav ul li a{position:relative;display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border-radius:9999px;transition:all 0.3s ease-in-out;color:var(--text-color-light);font-weight:500;}
+        nav ul li a .nav-icon{width:1.25em;height:1.25em;fill:currentColor;transition:fill 0.3s ease-in-out;}
+        nav ul li a:hover{background-color:rgba(253,224,71,0.2);color:var(--accent-color);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+        nav ul li a.active{background-color:var(--accent-color);color:var(--text-color-dark);box-shadow:0 6px 20px rgba(253,224,71,0.4);transform:translateY(-2px);}
+        nav ul li a.active .nav-icon{fill:var(--text-color-dark);}
+        nav ul li a::after{content:none;}
+        .profile-pic:hover{transform:scale(1.05) rotate(2deg);box-shadow:0 10px 20px rgba(0,0,0,0.2);}
+        .card:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.3);}
+        @media (max-width:767px){nav{flex-direction:column;align-items:center;padding-top:1rem;padding-bottom:1rem;}nav ul{margin-top:1rem;flex-wrap:wrap;justify-content:center;}nav ul li{margin:0.5rem 0.75rem;}nav ul li a{padding:0.5rem 1rem;}}
+
+        .project-image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .project-image-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease-in-out;
+        }
+        .project-image-grid img:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+    <div class="container mx-auto p-4 md:p-8 flex-grow">
+        <nav class="flex justify-center items-center py-6 mb-8 rounded-full px-6 bg-blue-800 bg-opacity-70 backdrop-blur-md shadow-lg animate-slideUp">
+            <ul class="flex space-x-2 sm:space-x-4 flex-wrap justify-center">
+                <li><a href="index.html">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.38 0 2.5 1.12 2.5 2.5S13.38 10.5 12 10.5 9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM12 19.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.88 6-3.88s5.97 1.89 6 3.88c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                    <span>About Sadi</span>
+                </a></li>
+                <li><a href="preferences.html">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.09-.76-1.72-1.06l-.42-2.61c-.04-.24-.24-.42-.48-.42h-4c-.24 0-.43.18-.47.42l-.42 2.61c-.63.3-1.2.66-1.72 1.06l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.09.76 1.72 1.06l.42 2.61c.04.24.24.42.48.42h4c.24 0 .43-.18.47-.42l.42-2.61c.63-.3 1.2-.66 1.72-1.06l2.49 1c.22.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+                    <span>Personal Preference</span>
+                </a></li>
+                <li><a href="skills.html">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.79z"/></svg>
+                    <span>Skills</span>
+                </a></li>
+                <li><a href="projects.html">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                    <span>Projects</span>
+                </a></li>
+                <li><a href="contact.html">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>Contact</span>
+                </a></li>
+            </ul>
+        </nav>
+
+        <header id="projects-hero" class="hero text-center py-20 px-4 rounded-xl shadow-2xl bg-gradient-to-br from-indigo-700 to-blue-700 mb-12 animate-slideUp">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">My Projects</h1>
+            <p class="subtitle text-xl md:text-2xl text-indigo-200 mb-8">Showcasing a selection of my work and personal endeavors.</p>
+        </header>
+
+        <main>
+            <section id="project-nwu-my-class" class="card bg-indigo-700 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold text-yellow-300 mb-6 border-b-2 border-blue-400 pb-3">NWU My Class</h2>
+                <div class="space-y-4 text-lg text-white">
+                    <p><strong class="text-blue-300">Project Idea:</strong> Md Mahmudul Haque</p>
+                    <p><strong class="text-blue-300">Project Type:</strong> Class Management Android App</p>
+                    <p><strong class="text-blue-300">Project Purpose:</strong> Software Development (CSE-2200) Course</p>
+                    <p><strong class="text-blue-300">Technology Used:</strong> Java</p>
+                    <p><strong class="text-blue-300">Limitations:</strong> No Database</p>
+                </div>
+                <div class="project-image-grid">
+                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+1" alt="NWU My Class screenshot 1">
+                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+2" alt="NWU My Class screenshot 2">
+                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+3" alt="NWU My Class screenshot 3">
+                    <img src="https://placehold.co/300x200/3b82f6/FFFFFF?text=NWU+My+Class+4" alt="NWU My Class screenshot 4">
+                    <!-- Add more images here (up to 6 total) -->
+                </div>
+            </section>
+
+            <section id="project-helo-apa" class="card bg-purple-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold text-cyan-300 mb-6 border-b-2 border-purple-400 pb-3">Helo Apa</h2>
+                <div class="space-y-4 text-lg text-white">
+                    <p><strong class="text-purple-300">Project Idea:</strong> Sheikh Hasina</p>
+                    <p><strong class="text-purple-300">Project Type:</strong> Audio Calling App</p>
+                    <p><strong class="text-purple-300">Project Purpose:</strong> Practice</p>
+                    <p><strong class="text-purple-300">Technology Used:</strong> Java, Firebase</p>
+                    <p><strong class="text-purple-300">Limitations:</strong> Database is too small</p>
+                </div>
+                <div class="project-image-grid">
+                    <img src="https://placehold.co/300x200/8e44ad/FFFFFF?text=Helo+Apa+1" alt="Helo Apa screenshot 1">
+                    <img src="https://placehold.co/300x200/8e44ad/FFFFFF?text=Helo+Apa+2" alt="Helo Apa screenshot 2">
+                    <img src="https://placehold.co/300x200/8e44ad/FFFFFF?text=Helo+Apa+3" alt="Helo Apa screenshot 3">
+                    <!-- Add more images here (up to 6 total) -->
+                </div>
+            </section>
+
+            <section id="project-hydrovigil" class="card bg-blue-900 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold text-lime-300 mb-6 border-b-2 border-green-400 pb-3">HydroVigil</h2>
+                <div class="space-y-4 text-lg text-white">
+                    <p><strong class="text-lime-300">Project Idea:</strong> Md Khan Bahadur Sadi</p>
+                    <p><strong class="text-lime-300">Project Type:</strong> IoT-based Water Level Monitoring System</p>
+                    <p><strong class="text-lime-300">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
+                    <p><strong class="text-lime-300">Technology Used:</strong> ESP8266, HC-SR04 Ultrasonic Sensor</p>
+                    <p><strong class="text-lime-300">Limitations:</strong></p>
+                    <ul class="list-disc pl-5">
+                        <li>Sensor Accuracy: The HC-SR04 ultrasonic sensor may not provide accurate readings in environments with turbulence or foam on the water surface.</li>
+                        <li>Limited Range: The ultrasonic sensor has a limited measuring range (typically 2 cm to 400 cm), which may not be suitable for monitoring very deep or large water reservoirs.</li>
+                        <li>Wi-Fi Dependency: The ESP8266 module relies on a stable Wi-Fi connection to send notifications. In areas with poor connectivity, data transmission may fail.</li>
+                        <li>Environmental Sensitivity: Extreme weather conditions, such as high humidity or temperature fluctuations, can affect sensor performance.</li>
+                        <li>Maintenance Requirements: Regular maintenance is needed to clean the sensor and ensure proper operation, especially in outdoor or harsh environments.</li>
+                        <li>Data Security: Without encryption, transmitted data may be vulnerable to interception or tampering.</li>
+                        <li>Scalability Challenges: Adding more sensors or integrating with other systems may require significant adjustments to hardware and software.</li>
+                        <li>Limited Battery Life: If battery-powered, the system may require frequent recharging or battery replacement, reducing its practicality for long-term use.</li>
+                        <li>Interference Issues: Nearby objects or obstacles may cause signal reflections, leading to inaccurate distance measurements.</li>
+                    </ul>
+                </div>
+                <div class="project-image-grid">
+                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+1" alt="HydroVigil screenshot 1">
+                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+2" alt="HydroVigil screenshot 2">
+                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+3" alt="HydroVigil screenshot 3">
+                    <img src="https://placehold.co/300x200/2ecc71/FFFFFF?text=HydroVigil+4" alt="HydroVigil screenshot 4">
+                    <!-- Add more images here (up to 6 total) -->
+                </div>
+            </section>
+
+            <section id="project-hydrovigil-app" class="card bg-teal-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold text-amber-300 mb-6 border-b-2 border-yellow-400 pb-3">HydroVigil App</h2>
+                <div class="space-y-4 text-lg text-white">
+                    <p><strong class="text-amber-300">Project Idea:</strong> Khan Bahadur Sadi</p>
+                    <p><strong class="text-amber-300">Project Type:</strong> IoT-based Water Level Monitoring System Data Showing App</p>
+                    <p><strong class="text-amber-300">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
+                    <p><strong class="text-amber-300">Technology Used:</strong> Java, Firebase</p>
+                    <p><strong class="text-amber-300">Limitations:</strong> Totally IoT-based</p>
+                </div>
+                <div class="project-image-grid">
+                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+1" alt="HydroVigil App screenshot 1">
+                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+2" alt="HydroVigil App screenshot 2">
+                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+3" alt="HydroVigil App screenshot 3">
+                    <img src="https://placehold.co/300x200/c0392b/FFFFFF?text=HydroVigil+App+4" alt="HydroVigil App screenshot 4">
+                    <!-- Add more images here (up to 6 total) -->
+                </div>
+            </section>
+
+            <section id="project-ghorbondhu" class="card bg-red-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold text-yellow-300 mb-6 border-b-2 border-red-400 pb-3">GhorBondhu – A Local Service Booking App for Your Neighborhood</h2>
+                <div class="space-y-4 text-lg text-white">
+                    <p>"GhorBondhu" is a user-friendly mobile application created to connect people within a community by making local service booking easier, faster, and more organized. Designed and developed by Muhammad Khan Bahadur Sadi, this app helps users both post and request household or personal services — like electricians, tutors, cleaners, or any skilled help — directly from their smartphones.</p>
+                    <p><strong class="text-red-300">Secure Login System:</strong> Users can register or log in using their email and password. Email verification is implemented for extra security, ensuring a trusted user base.</p>
+                    <p><strong class="text-red-300">Dynamic Newsfeed:</strong> After logging in, users are greeted with a real-time newsfeed where they can browse available services posted by others. Each service post includes details like service title, description, price, and the poster’s contact info.</p>
+                    <p><strong class="text-red-300">Service Posting Form:</strong> Any user can fill out a simple form to post a service they’re offering — turning the app into a platform for earning and networking within the local area.</p>
+                    <p><strong class="text-red-300">Order Now Feature:</strong> Interested users can click on the “Order Now” button to request a service instantly, making the process smooth and interactive.</p>
+                    <p><strong class="text-red-300">Built using:</strong> Flutter and connected to Firebase, the MVP version of GhorBondhu already includes a splash screen, authentication system, verified sign-ups, and live data loading from Firebase. The app reflects your vision of making local service-sharing simple and trusted — just like a “home-friend” (Ghor Bondhu) would be.</p>
+                </div>
+                <div class="project-image-grid">
+                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+1" alt="GhorBondhu App screenshot 1">
+                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+2" alt="GhorBondhu App screenshot 2">
+                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+3" alt="GhorBondhu App screenshot 3">
+                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+4" alt="GhorBondhu App screenshot 4">
+                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+5" alt="GhorBondhu App screenshot 5">
+                    <img src="https://placehold.co/300x200/ff0000/FFFFFF?text=GhorBondhu+App+6" alt="GhorBondhu App screenshot 6">
+                </div>
+            </section>
+
+            <section id="project-ghorbondhu-website" class="card bg-yellow-800 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
+                <h2 class="text-4xl font-bold text-blue-300 mb-6 border-b-2 border-yellow-400 pb-3">GhorBondhu Website – The Digital Platform for Local Services</h2>
+                <div class="space-y-4 text-lg text-white">
+                    <p>The GhorBondhu Website is a modern, user-friendly web platform designed to make local service exchange simple, fast, and reliable. It is the web version of the GhorBondhu mobile app, aimed at helping people find or offer everyday services within their community — all from the comfort of their home.</p>
+                    <p><strong class="text-blue-300">Email Login with Verification:</strong> Users can sign up or log in using their email and password. A verification system is in place to ensure user authenticity and security.</p>
+                    <p><strong class="text-blue-300">Live Newsfeed of Services:</strong> The homepage features a real-time newsfeed where users can browse service posts submitted by others. Each post includes details like service name, description, price, and an option to order.</p>
+                    <p><strong class="text-blue-300">Service Posting Form:</strong> Any user can easily fill out a form to post a service they are offering — making it ideal for freelancers, students, or local workers to showcase their skills.</p>
+                    <p><strong class="text-blue-300">“Order Now” Button:</strong> Each service post includes an "Order Now" button that allows interested users to directly place a request for the service.</p>
+                    <p><strong class="text-blue-300">Responsive Web Design:</strong> Built using HTML, CSS, and PHP, the website is fully responsive — meaning it works smoothly on both desktop and mobile devices.</p>
+                    <p class="text-yellow-300 font-semibold">✅ GhorBondhu – Where your next helping hand might be just a neighbor away.</p>
+                    <p>This website is a step toward building a trustworthy, community-driven digital network where people can support and rely on each other for everyday needs.</p>
+                </div>
+                <div class="project-image-grid">
+                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+1" alt="GhorBondhu Website screenshot 1">
+                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+2" alt="GhorBondhu Website screenshot 2">
+                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+3" alt="GhorBondhu Website screenshot 3">
+                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+4" alt="GhorBondhu Website screenshot 4">
+                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+5" alt="GhorBondhu Website screenshot 5">
+                    <img src="https://placehold.co/300x200/fde047/1a202c?text=GhorBondhu+Web+6" alt="GhorBondhu Website screenshot 6">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="text-center py-6 mt-12 bg-gray-900 text-gray-400 border-t border-gray-700">
+        <p>&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section, header');
+
+            const currentPage = window.location.pathname.split('/').pop();
+
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href');
+
+                if (linkHref.endsWith('.html')) {
+                    if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+                        link.classList.add('active');
+                    }
+                } else {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetSection = document.getElementById(targetId);
+
+                        if (targetSection) {
+                            window.scrollTo({
+                                top: targetSection.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                        navLinks.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                }
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            if (!link.getAttribute('href').endsWith('.html')) {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                    link.classList.add('active');
+                                }
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                if (section.id && !Array.from(navLinks).some(link => link.getAttribute('href').includes(section.id + '.html'))) {
+                    observer.observe(section);
+                }
+            });
+
+            if (window.location.hash) {
+                const initialHash = window.location.hash.substring(1);
+                const initialLink = document.querySelector(`nav ul li a[href="#${initialHash}"]`);
+                if (initialLink) {
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    initialLink.classList.add('active');
+                }
+            } else if (currentPage === '' || currentPage === 'index.html') {
+                const aboutSadiLink = document.querySelector('nav ul li a[href="index.html"]');
+                if (aboutSadiLink) {
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    aboutSadiLink.classList.add('active');
+                }
+            }
+        });
+
+        window.onload = function() {
+            const canvas = document.getElementById('background-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let particles = [];
+            const numParticles = 35;
+            const particleColors = [
+                'rgba(255, 0, 0, 0.9)',
+                'rgba(0, 255, 0, 0.9)',
+                'rgba(0, 0, 255, 0.9)',
+                'rgba(255, 255, 0, 0.9)',
+                'rgba(0, 255, 255, 0.9)',
+                'rgba(255, 0, 255, 0.9)',
+                'rgba(255, 128, 0, 0.9)',
+                'rgba(128, 0, 255, 0.9)',
+                'rgba(0, 128, 0, 0.9)'
+            ];
+
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.radius = Math.random() * 1.5 + 0.5;
+                    this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                    this.velocity = {
+                        x: (Math.random() - 0.5) * 0.3,
+                        y: (Math.random() - 0.5) * 0.3
+                    };
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = this.radius * 1;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                update() {
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+
+                    if (this.x < 0 - this.radius) this.x = canvas.width + this.radius;
+                    if (this.x > canvas.width + this.radius) this.x = 0 - this.radius;
+                    if (this.y < 0 - this.radius) this.y = canvas.height + this.radius;
+                    if (this.y > canvas.height + this.radius) this.y = 0 - this.radius;
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function connectParticles() {
+                const maxDistance = 100;
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        const dx = particles[a].x - particles[b].x;
+                        const dy = particles[a].y - particles[b].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < maxDistance) {
+                            const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
+                            gradient.addColorStop(0, particles[a].color.replace('0.9', `${(1 - distance / maxDistance) * 0.6}`));
+                            gradient.addColorStop(1, particles[b].color.replace('0.9', `${(1 - distance / maxDistance) * 0.6}`));
+
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                connectParticles();
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+            }
+
+            setCanvasSize();
+            initParticles();
+            animate();
+
+            window.addEventListener('resize', () => {
+                setCanvasSize();
+                initParticles();
+            });
+        };
+    </script>
+</body>
+</html>
