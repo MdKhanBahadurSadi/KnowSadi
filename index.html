@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome - Khan Bahadur Sadi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap)" rel="stylesheet">
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
     <style>
         body {
             margin: 0;
@@ -75,10 +75,10 @@
             transform: translateX(var(--initial-x, 0)) translateY(var(--initial-y, 0)) rotate(var(--initial-rotate, 0deg)) scale(var(--initial-scale, 1));
             clip-path: circle(0% at 50% 50%);
             filter: blur(var(--initial-blur, 10px));
-            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                        opacity 1s ease-out,
-                        clip-path 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                        filter 1.2s ease-out;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        opacity 0.6s ease-out,
+                        clip-path 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        filter 0.8s ease-out;
             transition-delay: var(--delay, 0s);
         }
 
@@ -99,6 +99,10 @@
                 font-size: 5rem;
                 line-height: 1;
             }
+            /* Adjusted font size for the main name on tablets */
+            .phrase-wrapper:not(.final-new-phrase) {
+                font-size: 3.5rem; /* Reduced from 5rem for main name on 768px */
+            }
             .splash-logo-char {
                 font-size: 2.5rem;
                 line-height: 1.1;
@@ -112,6 +116,10 @@
             .phrase-wrapper {
                 font-size: 3rem;
                 line-height: 1;
+            }
+            /* Adjusted font size for the main name on mobile */
+            .phrase-wrapper:not(.final-new-phrase) {
+                font-size: 2rem; /* Reduced from 3rem for main name on 480px */
             }
             .splash-logo-char {
                 font-size: 2rem;
@@ -133,42 +141,21 @@
 
     <script>
         const colors = [
-            '#FF6347',
-            '#4682B4',
-            '#32CD32',
-            '#FFD700',
-            '#9370DB',
-            '#00CED1',
-            '#FF69B4',
-            '#FFA500',
-            '#ADFF2F',
-            '#DA70D6',
-            '#7B68EE',
-            '#8A2BE2',
-            '#00FFFF',
-            '#DC143C',
-            '#F0E68C',
-            '#1E90FF',
-            '#FF4500',
-            '#20B2AA',
-            '#BA55D3',
-            '#00FF7F'
+            '#FF6347', '#4682B4', '#32CD32', '#FFD700', '#9370DB',
+            '#00CED1', '#FF69B4', '#FFA500', '#ADFF2F', '#DA70D6',
+            '#7B68EE', '#8A2BE2', '#00FFFF', '#DC143C', '#F0E68C',
+            '#1E90FF', '#FF4500', '#20B2AA', '#BA55D3', '#00FF7F'
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
             const phrases = [
-                "MD",
-                "Khan",
-                "Bahadur",
-                "Sadi",
-                "MD Khan Bahadur Sadi",
+                "MD Khan Bahadur Sadi", // Updated to include "MD"
                 "Love for the sake of Allah, and hate for the sake of Allah"
             ];
             const wordDisplayContainer = document.getElementById('wordDisplayContainer');
             let displayIndex = 0;
-            let totalAnimationTime = 0;
 
-            const totalSplashDuration = 20000;
+            const totalSplashDuration = 7000;
 
             function createCharSpan(char, index, isFinalPhrase, totalLettersInWord) {
                 const span = document.createElement('span');
@@ -187,27 +174,23 @@
                     rotateFactor = 0.6;
                 }
 
-                const randomX = (Math.random() - 0.5) * 1200 * scatterFactor;
-                const randomY = (Math.random() - 0.5) * 1200 * scatterFactor;
-                const randomRotate = (Math.random() - 0.5) * 1800 * rotateFactor;
-                const randomScale = Math.random() * 1.0 + 0.1;
+                const randomX = (Math.random() - 0.5) * 600 * scatterFactor;
+                const randomY = (Math.random() - 0.5) * 600 * scatterFactor;
+                const randomRotate = (Math.random() - 0.5) * 900 * rotateFactor;
+                const randomScale = Math.random() * 0.5 + 0.5;
 
-                const delay = (index * 0.05) + 0.3;
+                const delay = (index * 0.03) + 0.1;
+                const initialBlur = Math.random() * 8 + 4;
 
                 span.style.setProperty('--initial-x', `${randomX}px`);
                 span.style.setProperty('--initial-y', `${randomY}px`);
                 span.style.setProperty('--initial-rotate', `${randomRotate}deg`);
                 span.style.setProperty('--initial-scale', `${randomScale}`);
                 span.style.setProperty('--delay', `${delay}s`);
-                span.style.setProperty('--initial-blur', `${Math.random() * 15 + 8}px`);
+                span.style.setProperty('--initial-blur', `${initialBlur}px`);
 
                 let finalY = 0;
                 let finalRandomRotate = 0;
-
-                if (!isFinalPhrase) {
-                    finalY = (Math.random() - 0.5) * 20;
-                    finalRandomRotate = (Math.random() - 0.5) * 10;
-                }
                 
                 span.style.setProperty('--final-y', `${finalY}px`);
                 span.style.setProperty('--final-rotate', `${finalRandomRotate}deg`);
@@ -227,13 +210,13 @@
                 wordDisplayContainer.innerHTML = '';
 
                 const isFinalPhraseSequence = (displayIndex === phrases.length - 1);
-                const isSecondLastPhrase = (displayIndex === phrases.length - 2);
+
+                const phraseWrapper = document.createElement('div');
+                phraseWrapper.classList.add('phrase-wrapper');
+                phraseWrapper.style.textAlign = 'center';
 
                 if (isFinalPhraseSequence) {
-                    const phraseWrapper = document.createElement('div');
-                    phraseWrapper.classList.add('phrase-wrapper', 'final-new-phrase');
-                    phraseWrapper.style.textAlign = 'center';
-
+                    phraseWrapper.classList.add('final-new-phrase');
                     if (window.innerWidth <= 480) {
                         phraseWrapper.style.fontSize = '1rem';
                     } else if (window.innerWidth <= 768) {
@@ -251,52 +234,11 @@
                         phraseWrapper.appendChild(wordContainer);
                         phraseWrapper.appendChild(document.createTextNode('\u00A0'));
                     });
-                    wordDisplayContainer.appendChild(phraseWrapper);
-
-                    setTimeout(() => {
-                        phraseWrapper.classList.add('is-visible');
-                        const chars = phraseWrapper.querySelectorAll('.splash-logo-char');
-                        chars.forEach(char => {
-                            char.classList.add('animate-in');
-                        });
-                    }, 50);
-
-                } else if (isSecondLastPhrase) {
-                    const wordsInFinalPhrase = currentPhraseText.split(' ');
-                    wordsInFinalPhrase.forEach((word, wordIndex) => {
-                        const wordSpan = document.createElement('div');
-                        wordSpan.classList.add('phrase-wrapper');
-                        wordSpan.style.textAlign = 'center';
-
-                        if (window.innerWidth <= 480) {
-                            wordSpan.style.fontSize = '2rem';
-                        } else if (window.innerWidth <= 768) {
-                            wordSpan.style.fontSize = '2.5rem';
-                        } else {
-                            wordSpan.style.fontSize = '4rem';
-                        }
-
-                        word.split('').forEach((char, charIndex) => {
-                            wordSpan.appendChild(createCharSpan(char, charIndex, true, word.length));
-                        });
-                        wordDisplayContainer.appendChild(wordSpan);
-
-                        setTimeout(() => {
-                            wordSpan.classList.add('is-visible');
-                            const chars = wordSpan.querySelectorAll('.splash-logo-char');
-                            chars.forEach(char => {
-                                char.classList.add('animate-in');
-                            });
-                        }, 50 + (wordIndex * 200));
-                    });
-
                 } else {
-                    const phraseWrapper = document.createElement('div');
-                    phraseWrapper.classList.add('phrase-wrapper');
-                     if (window.innerWidth <= 480) {
-                        phraseWrapper.style.fontSize = '3rem';
+                    if (window.innerWidth <= 480) {
+                        phraseWrapper.style.fontSize = '2rem'; // Adjusted for mobile
                     } else if (window.innerWidth <= 768) {
-                        phraseWrapper.style.fontSize = '5rem';
+                        phraseWrapper.style.fontSize = '3.5rem'; // Adjusted for tablet
                     } else {
                         phraseWrapper.style.fontSize = '8rem';
                     }
@@ -310,44 +252,39 @@
                             phraseWrapper.appendChild(createCharSpan(char, charIndex, false, currentPhraseText.length));
                         }
                     });
-                    wordDisplayContainer.appendChild(phraseWrapper);
-
-                    setTimeout(() => {
-                        phraseWrapper.classList.add('is-visible');
-                        const chars = phraseWrapper.querySelectorAll('.splash-logo-char');
-                        chars.forEach(char => {
-                            char.classList.add('animate-in');
-                        });
-                    }, 50);
-                }
-
-                const charAnimationDuration = 1.2;
-                const maxCharDelay = (currentPhraseText.length - 1) * 0.05 + 0.3;
-                const totalCharAppearTime = charAnimationDuration + maxCharDelay;
-
-                let displayTimeForPhrase = 2500;
-                if (isSecondLastPhrase) {
-                    displayTimeForPhrase = 4000;
-                } else if (isFinalPhraseSequence) {
-                    displayTimeForPhrase = totalSplashDuration - 5000 - totalAnimationTime;
                 }
                 
-                totalAnimationTime += displayTimeForPhrase;
+                wordDisplayContainer.appendChild(phraseWrapper);
 
-                if (!isFinalPhraseSequence) {
-                    setTimeout(() => {
-                        wordDisplayContainer.querySelectorAll('.phrase-wrapper').forEach(pw => pw.classList.remove('is-visible'));
-                    }, totalCharAppearTime * 1000 + 500);
+                setTimeout(() => {
+                    phraseWrapper.classList.add('is-visible');
+                    const chars = phraseWrapper.querySelectorAll('.splash-logo-char');
+                    chars.forEach(char => {
+                        char.classList.add('animate-in');
+                    });
+                }, 50);
 
-                    setTimeout(() => {
-                        displayIndex++;
-                        animateNextPhrase();
-                    }, totalCharAppearTime * 1000 + 1500);
+                const charAnimationDuration = 0.8;
+                const maxCharDelay = (currentPhraseText.length - 1) * 0.03 + 0.1;
+                const totalCharAppearTime = charAnimationDuration + maxCharDelay;
+
+                let displayTimeForPhrase;
+                if (isFinalPhraseSequence) {
+                    displayTimeForPhrase = totalSplashDuration - (charAnimationDuration * 1000 + maxCharDelay * 1000 + 500);
                 } else {
-                    setTimeout(() => {
-                        window.location.replace('verification.html');
-                    }, 5000);
+                    displayTimeForPhrase = 3000;
                 }
+                
+                setTimeout(() => {
+                    if (!isFinalPhraseSequence) {
+                         wordDisplayContainer.querySelectorAll('.phrase-wrapper').forEach(pw => pw.classList.remove('is-visible'));
+                    }
+                }, totalCharAppearTime * 1000 + 500);
+
+                setTimeout(() => {
+                    displayIndex++;
+                    animateNextPhrase();
+                }, totalCharAppearTime * 1000 + (isFinalPhraseSequence ? (totalSplashDuration - (totalCharAppearTime * 1000 + 500)) : 1000));
             }
 
             animateNextPhrase();
@@ -358,18 +295,14 @@
             const ctx = canvas.getContext('2d');
 
             let particles = [];
-            const numParticles = 20; 
+            const numParticles = 20;
             const particleColors = [
-                'rgba(255, 0, 0, 0.2)',
-                'rgba(0, 255, 0, 0.2)',
-                'rgba(0, 0, 255, 0.2)',
-                'rgba(255, 255, 0, 0.2)',
-                'rgba(0, 255, 255, 0.2)',
-                'rgba(255, 0, 255, 0.2)'
+                'rgba(255, 0, 0, 0.2)', 'rgba(0, 255, 0, 0.2)', 'rgba(0, 0, 255, 0.2)',
+                'rgba(255, 255, 0, 0.2)', 'rgba(0, 255, 255, 0.2)', 'rgba(255, 0, 255, 0.2)'
             ];
 
             let flowerParticles = [];
-            let numFlowerParticles = 10; 
+            let numFlowerParticles = 10;
 
             if (window.innerWidth <= 768) {
                 numFlowerParticles = 7;
