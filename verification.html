@@ -8,12 +8,23 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background-color: #f0f2f5;
             margin: 0;
             overflow: hidden;
+            position: relative;
+        }
+        .main-heading {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 40px;
+            text-align: center;
+            position: absolute;
+            top: 50px;
+            width: 100%;
         }
         .container {
             background-color: #ffffff;
@@ -24,9 +35,10 @@
             transition: opacity 0.5s ease-in-out;
             max-width: 600px;
             width: 90%;
+            margin-top: 120px;
         }
         .verification-image {
-            max-width: 200px; /* Increased size for single image */
+            max-width: 200px;
             height: auto;
             margin-bottom: 30px;
             border-radius: 8px;
@@ -107,6 +119,7 @@
     </style>
 </head>
 <body>
+    <h2 class="main-heading">Verify You are a Human</h2>
     <div class="container" id="mainContainer">
         <img src="https://th.bing.com/th/id/OIP.yTFthDScPIOQkBpquLSRJAHaEK?r=0&rs=1&pid=ImgDetMain&cb=idpwebpc2" alt="Palestine Solidarity" class="verification-image">
         <h1>Are you standing with Palestine?</h1>
