@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Khan Bahadur Sadi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+            filter: blur(0.5px);
+        }
+
+        .splash-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .word-display-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            text-shadow: 0 4px 15px rgba(253, 224, 71, 0.4);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            min-height: 150px;
+        }
+
+        .phrase-wrapper {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            font-size: 8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            height: auto;
+            padding: 0 10px;
+        }
+
+        .phrase-wrapper.is-visible {
+            opacity: 1;
+        }
+
+        .splash-logo-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(var(--initial-x, 0)) translateY(var(--initial-y, 0)) rotate(var(--initial-rotate, 0deg)) scale(var(--initial-scale, 1));
+            clip-path: circle(0% at 50% 50%);
+            filter: blur(var(--initial-blur, 10px));
+            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        opacity 1s ease-out,
+                        clip-path 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        filter 1.2s ease-out;
+            transition-delay: var(--delay, 0s);
+        }
+
+        .splash-logo-char.animate-in {
+            opacity: 1;
+            transform: translateX(0) translateY(var(--final-y, 0px)) rotate(var(--final-rotate, 0deg)) scale(1);
+            clip-path: circle(100% at 50% 50%);
+            filter: blur(0px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .phrase-wrapper {
+                font-size: 5rem;
+                line-height: 1;
+            }
+            .splash-logo-char {
+                font-size: 2.5rem;
+                line-height: 1.1;
+            }
+            .phrase-wrapper.final-new-phrase {
+                font-size: 1.5rem;
+                padding: 0 5px;
+            }
+        }
+        @media (max-width: 480px) {
+            .phrase-wrapper {
+                font-size: 3rem;
+                line-height: 1;
+            }
+            .splash-logo-char {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+            .phrase-wrapper.final-new-phrase {
+                font-size: 1rem;
+                padding: 0 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+    <div class="splash-content">
+        <div class="word-display-container" id="wordDisplayContainer">
+        </div>
+    </div>
+
+    <script>
+        const colors = [
+            '#FF6347',
+            '#4682B4',
+            '#32CD32',
+            '#FFD700',
+            '#9370DB',
+            '#00CED1',
+            '#FF69B4',
+            '#FFA500',
+            '#ADFF2F',
+            '#DA70D6',
+            '#7B68EE',
+            '#8A2BE2',
+            '#00FFFF',
+            '#DC143C',
+            '#F0E68C',
+            '#1E90FF',
+            '#FF4500',
+            '#20B2AA',
+            '#BA55D3',
+            '#00FF7F'
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const phrases = [
+                "MD",
+                "Khan",
+                "Bahadur",
+                "Sadi",
+                "MD Khan Bahadur Sadi",
+                "Love for the sake of Allah, and hate for the sake of Allah"
+            ];
+            const wordDisplayContainer = document.getElementById('wordDisplayContainer');
+            let displayIndex = 0;
+            let totalAnimationTime = 0;
+
+            const totalSplashDuration = 20000;
+
+            function createCharSpan(char, index, isFinalPhrase, totalLettersInWord) {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.classList.add('splash-logo-char');
+                
+                const viewportWidth = window.innerWidth;
+                let scatterFactor = 1;
+                let rotateFactor = 1;
+
+                if (viewportWidth <= 480) {
+                    scatterFactor = 0.5;
+                    rotateFactor = 0.3;
+                } else if (viewportWidth <= 768) {
+                    scatterFactor = 0.7;
+                    rotateFactor = 0.6;
+                }
+
+                const randomX = (Math.random() - 0.5) * 1200 * scatterFactor;
+                const randomY = (Math.random() - 0.5) * 1200 * scatterFactor;
+                const randomRotate = (Math.random() - 0.5) * 1800 * rotateFactor;
+                const randomScale = Math.random() * 1.0 + 0.1;
+
+                const delay = (index * 0.05) + 0.3;
+
+                span.style.setProperty('--initial-x', `${randomX}px`);
+                span.style.setProperty('--initial-y', `${randomY}px`);
+                span.style.setProperty('--initial-rotate', `${randomRotate}deg`);
+                span.style.setProperty('--initial-scale', `${randomScale}`);
+                span.style.setProperty('--delay', `${delay}s`);
+                span.style.setProperty('--initial-blur', `${Math.random() * 15 + 8}px`);
+
+                let finalY = 0;
+                let finalRandomRotate = 0;
+
+                if (!isFinalPhrase) {
+                    finalY = (Math.random() - 0.5) * 20;
+                    finalRandomRotate = (Math.random() - 0.5) * 10;
+                }
+                
+                span.style.setProperty('--final-y', `${finalY}px`);
+                span.style.setProperty('--final-rotate', `${finalRandomRotate}deg`);
+
+                span.style.color = colors[index % colors.length];
+                
+                return span;
+            }
+
+            function animateNextPhrase() {
+                if (displayIndex >= phrases.length) {
+                    window.location.replace('verification.html');
+                    return;
+                }
+
+                const currentPhraseText = phrases[displayIndex];
+                wordDisplayContainer.innerHTML = '';
+
+                const isFinalPhraseSequence = (displayIndex === phrases.length - 1);
+                const isSecondLastPhrase = (displayIndex === phrases.length - 2);
+
+                if (isFinalPhraseSequence) {
+                    const phraseWrapper = document.createElement('div');
+                    phraseWrapper.classList.add('phrase-wrapper', 'final-new-phrase');
+                    phraseWrapper.style.textAlign = 'center';
+
+                    if (window.innerWidth <= 480) {
+                        phraseWrapper.style.fontSize = '1rem';
+                    } else if (window.innerWidth <= 768) {
+                        phraseWrapper.style.fontSize = '1.5rem';
+                    } else {
+                        phraseWrapper.style.fontSize = '2.5rem';
+                    }
+                    phraseWrapper.style.lineHeight = '1.4';
+
+                    currentPhraseText.split(' ').forEach(word => {
+                        const wordContainer = document.createElement('span');
+                        word.split('').forEach((char, charIndex) => {
+                            wordContainer.appendChild(createCharSpan(char, charIndex, true, word.length));
+                        });
+                        phraseWrapper.appendChild(wordContainer);
+                        phraseWrapper.appendChild(document.createTextNode('\u00A0'));
+                    });
+                    wordDisplayContainer.appendChild(phraseWrapper);
+
+                    setTimeout(() => {
+                        phraseWrapper.classList.add('is-visible');
+                        const chars = phraseWrapper.querySelectorAll('.splash-logo-char');
+                        chars.forEach(char => {
+                            char.classList.add('animate-in');
+                        });
+                    }, 50);
+
+                } else if (isSecondLastPhrase) {
+                    const wordsInFinalPhrase = currentPhraseText.split(' ');
+                    wordsInFinalPhrase.forEach((word, wordIndex) => {
+                        const wordSpan = document.createElement('div');
+                        wordSpan.classList.add('phrase-wrapper');
+                        wordSpan.style.textAlign = 'center';
+
+                        if (window.innerWidth <= 480) {
+                            wordSpan.style.fontSize = '2rem';
+                        } else if (window.innerWidth <= 768) {
+                            wordSpan.style.fontSize = '2.5rem';
+                        } else {
+                            wordSpan.style.fontSize = '4rem';
+                        }
+
+                        word.split('').forEach((char, charIndex) => {
+                            wordSpan.appendChild(createCharSpan(char, charIndex, true, word.length));
+                        });
+                        wordDisplayContainer.appendChild(wordSpan);
+
+                        setTimeout(() => {
+                            wordSpan.classList.add('is-visible');
+                            const chars = wordSpan.querySelectorAll('.splash-logo-char');
+                            chars.forEach(char => {
+                                char.classList.add('animate-in');
+                            });
+                        }, 50 + (wordIndex * 200));
+                    });
+
+                } else {
+                    const phraseWrapper = document.createElement('div');
+                    phraseWrapper.classList.add('phrase-wrapper');
+                     if (window.innerWidth <= 480) {
+                        phraseWrapper.style.fontSize = '3rem';
+                    } else if (window.innerWidth <= 768) {
+                        phraseWrapper.style.fontSize = '5rem';
+                    } else {
+                        phraseWrapper.style.fontSize = '8rem';
+                    }
+
+                    currentPhraseText.split('').forEach((char, charIndex) => {
+                        if (char === ' ') {
+                            const space = document.createElement('span');
+                            space.innerHTML = '&nbsp;';
+                            phraseWrapper.appendChild(space);
+                        } else {
+                            phraseWrapper.appendChild(createCharSpan(char, charIndex, false, currentPhraseText.length));
+                        }
+                    });
+                    wordDisplayContainer.appendChild(phraseWrapper);
+
+                    setTimeout(() => {
+                        phraseWrapper.classList.add('is-visible');
+                        const chars = phraseWrapper.querySelectorAll('.splash-logo-char');
+                        chars.forEach(char => {
+                            char.classList.add('animate-in');
+                        });
+                    }, 50);
+                }
+
+                const charAnimationDuration = 1.2;
+                const maxCharDelay = (currentPhraseText.length - 1) * 0.05 + 0.3;
+                const totalCharAppearTime = charAnimationDuration + maxCharDelay;
+
+                let displayTimeForPhrase = 2500;
+                if (isSecondLastPhrase) {
+                    displayTimeForPhrase = 4000;
+                } else if (isFinalPhraseSequence) {
+                    displayTimeForPhrase = totalSplashDuration - 5000 - totalAnimationTime;
+                }
+                
+                totalAnimationTime += displayTimeForPhrase;
+
+                if (!isFinalPhraseSequence) {
+                    setTimeout(() => {
+                        wordDisplayContainer.querySelectorAll('.phrase-wrapper').forEach(pw => pw.classList.remove('is-visible'));
+                    }, totalCharAppearTime * 1000 + 500);
+
+                    setTimeout(() => {
+                        displayIndex++;
+                        animateNextPhrase();
+                    }, totalCharAppearTime * 1000 + 1500);
+                } else {
+                    setTimeout(() => {
+                        window.location.replace('verification.html');
+                    }, 5000);
+                }
+            }
+
+            animateNextPhrase();
+        });
+
+        window.onload = function() {
+            const canvas = document.getElementById('background-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let particles = [];
+            const numParticles = 20; 
+            const particleColors = [
+                'rgba(255, 0, 0, 0.2)',
+                'rgba(0, 255, 0, 0.2)',
+                'rgba(0, 0, 255, 0.2)',
+                'rgba(255, 255, 0, 0.2)',
+                'rgba(0, 255, 255, 0.2)',
+                'rgba(255, 0, 255, 0.2)'
+            ];
+
+            let flowerParticles = [];
+            let numFlowerParticles = 10; 
+
+            if (window.innerWidth <= 768) {
+                numFlowerParticles = 7;
+            }
+            if (window.innerWidth <= 480) {
+                numFlowerParticles = 5;
+            }
+
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class BackgroundParticle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.radius = Math.random() * 1.5 + 0.2;
+                    this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                    this.velocity = {
+                        x: (Math.random() - 0.5) * 0.3,
+                        y: (Math.random() - 0.5) * 0.3
+                    };
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = this.radius * 1;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                update() {
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+
+                    if (this.x < 0 - this.radius) this.x = canvas.width + this.radius;
+                    if (this.x > canvas.width + this.radius) this.x = 0 - this.radius;
+                    if (this.y < 0 - this.radius) this.y = canvas.height + this.radius;
+                    if (this.y > canvas.height + this.radius) this.y = 0 - this.radius;
+                }
+            }
+
+            class FlowerParticle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.radius = 0;
+                    this.maxRadius = Math.random() * 15 + 7;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.alpha = 1;
+                    this.growSpeed = Math.random() * 0.3 + 0.1;
+                    this.fadeSpeed = Math.random() * 0.01 + 0.005;
+                    this.rotation = Math.random() * Math.PI * 2;
+                    this.rotationSpeed = (Math.random() - 0.5) * 0.03;
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation);
+                    
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color.replace(')', `, ${this.alpha})`);
+                    ctx.shadowBlur = this.radius / 4;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.closePath();
+                    
+                    ctx.restore();
+                }
+
+                update() {
+                    this.radius += this.growSpeed;
+                    this.alpha -= this.fadeSpeed;
+                    this.rotation += this.rotationSpeed;
+
+                    if (this.alpha <= 0 || this.radius > this.maxRadius) {
+                        this.reset();
+                    }
+                }
+            }
+
+            function initAllParticles() {
+                particles = [];
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(new BackgroundParticle());
+                }
+
+                flowerParticles = [];
+                for (let i = 0; i < numFlowerParticles; i++) {
+                    flowerParticles.push(new FlowerParticle());
+                }
+            }
+
+            function connectBackgroundParticles() {
+                const maxDistance = 100;
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a; b < particles.length; b++) {
+                        const dx = particles[a].x - particles[b].x;
+                        const dy = particles[a].y - particles[b].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < maxDistance) {
+                            const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
+                            gradient.addColorStop(0, particles[a].color.replace(')', `, ${(1 - distance / maxDistance) * 0.2})`));
+                            gradient.addColorStop(1, particles[b].color.replace(')', `, ${(1 - distance / maxDistance) * 0.2})`));
+
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = 0.3;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animateBackground() {
+                requestAnimationFrame(animateBackground);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                connectBackgroundParticles();
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+
+                for (let i = 0; i < flowerParticles.length; i++) {
+                    flowerParticles[i].update();
+                    flowerParticles[i].draw();
+                }
+            }
+
+            setCanvasSize();
+            initAllParticles();
+            animateBackground();
+
+            window.addEventListener('resize', () => {
+                setCanvasSize();
+                initAllParticles();
+            });
+        };
+    </script>
+</body>
+</html>
