@@ -38,7 +38,7 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.7;
         }
         
         .container {
@@ -55,22 +55,39 @@
             gap: 0.5rem;
             padding: 0.6rem 1.2rem;
             border-radius: 9999px;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text-color-light);
             font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
         }
         
         .nav-link:hover {
             background-color: rgba(253, 224, 71, 0.2);
             color: var(--accent-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         
         .nav-link.active {
             background-color: var(--accent-color);
             color: var(--text-color-dark);
-            box-shadow: 0 6px 20px rgba(253, 224, 71, 0.4);
+            box-shadow: 0 10px 30px rgba(253, 224, 71, 0.4);
             transform: translateY(-2px);
         }
         
@@ -79,23 +96,60 @@
             backdrop-filter: blur(10px);
             border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card:hover::before {
+            opacity: 1;
         }
         
         .profile-pic {
             border-radius: 50%;
             border: 4px solid var(--primary-color);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .profile-pic:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-pic:hover::after {
+            opacity: 1;
         }
         
         .section-title {
@@ -113,20 +167,51 @@
             height: 3px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             border-radius: 3px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .fade-in-up {
-            animation: fade-in-up 0.8s ease-out forwards;
+            animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
         
         @keyframes fade-in-up {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        
+        .scale-in {
+            animation: scale-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes scale-in {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .slide-in-left {
+            animation: slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes slide-in-left {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
         
@@ -146,43 +231,148 @@
             }
         }
         
-        .scale-in {
-            animation: scale-in 0.7s ease-out forwards;
+        .rotate-in {
+            animation: rotate-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
         
-        @keyframes scale-in {
+        @keyframes rotate-in {
             from {
                 opacity: 0;
-                transform: scale(0.9);
+                transform: rotate(-5deg) scale(0.95);
             }
             to {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+        
+        .bounce-in {
+            animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        }
+        
+        @keyframes bounce-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
         }
         
-        .slide-up {
-            animation: slide-up 0.6s ease-out forwards;
+        .wave-animation {
+            position: relative;
+            overflow: hidden;
         }
         
-        @keyframes slide-up {
+        .wave-animation::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            border-radius: 50% 50% 0 0;
+            animation: wave 3s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: translateX(-100%) scaleX(0.5);
+            }
+            50% {
+                transform: translateX(0%) scaleX(1);
+            }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes gradient-shift {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(30deg);
+            }
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid var(--accent-color);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
             from {
-                opacity: 0;
-                transform: translateY(20px);
+                width: 0;
             }
             to {
-                opacity: 1;
-                transform: translateY(0);
+                width: 100%;
             }
         }
         
-        table th {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            color: white;
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: var(--accent-color);
+            }
         }
         
-        table tr:hover {
-            background-color: rgba(59, 130, 246, 0.2);
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .glow-on-hover {
+            transition: all 0.3s;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        .parallax {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .parallax-item {
+            transform: rotateX(15deg) rotateZ(-5deg);
+            transition: transform 0.5s;
+        }
+        
+        .parallax-item:hover {
+            transform: rotateX(0deg) rotateZ(0deg);
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
@@ -190,48 +380,48 @@
     <canvas id="background-canvas"></canvas>
     
     <div class="container mx-auto p-4 md:p-8 flex-grow">
-        <nav class="flex justify-center items-center py-6 mb-8 rounded-full px-6 bg-blue-800 bg-opacity-70 backdrop-blur-md shadow-lg">
+        <nav class="flex justify-center items-center py-6 mb-8 rounded-full px-6 bg-blue-800 bg-opacity-70 backdrop-blur-md shadow-lg wave-animation">
             <ul class="flex space-x-2 sm:space-x-4 flex-wrap justify-center">
-                <li><a href="#" class="nav-link active">
+                <li><a href="index.html" class="nav-link glow-on-hover">
                     <i class="fas fa-home"></i>
                     <span>About Sadi</span>
                 </a></li>
-                <li><a href="#" class="nav-link">
+                <li><a href="preferences.html" class="nav-link glow-on-hover">
                     <i class="fas fa-user-cog"></i>
                     <span>Personal Preference</span>
                 </a></li>
-                <li><a href="#" class="nav-link">
+                <li><a href="skills.html" class="nav-link glow-on-hover">
                     <i class="fas fa-code"></i>
                     <span>Skills</span>
                 </a></li>
-                <li><a href="#" class="nav-link">
+                <li><a href="projects.html" class="nav-link glow-on-hover">
                     <i class="fas fa-project-diagram"></i>
                     <span>Projects</span>
                 </a></li>
-                <li><a href="#" class="nav-link">
+                <li><a href="contact.html" class="nav-link glow-on-hover">
                     <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a></li>
             </ul>
         </nav>
         
-        <header class="text-center py-16 px-4 rounded-xl shadow-2xl bg-gradient-to-br from-blue-700 to-indigo-700 mb-12">
-            <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-4">Khan Bahadur Sadi</h1>
-            <p class="text-xl md:text-2xl text-blue-200 mb-8">Muslim | Software Developer | Future Software Engineer</p>
+        <header class="text-center py-16 px-4 rounded-xl shadow-2xl bg-gradient-to-br from-blue-700 to-indigo-700 mb-12 parallax">
+            <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-4 gradient-text">Khan Bahadur Sadi</h1>
+            <p class="text-xl md:text-2xl text-blue-200 mb-8 typing-effect">Software Developer & Future Software Engineer</p>
         </header>
         
         <main>
-            <section class="card p-8 rounded-2xl mb-12 fade-in-up">
+            <section id="about" class="card p-8 rounded-2xl mb-12 fade-in-up parallax-item">
                 <h2 class="text-4xl font-bold text-yellow-300 mb-6 section-title">About Me</h2>
                 <div class="flex flex-col md:flex-row items-center md:space-x-8">
-                    <img src="https://i.postimg.cc/fyL859n0/472004557-958020379582441-8585343648080228898-n.jpg" alt="Profile picture of Khan Bahadur Sadi" class="profile-pic w-40 h-40 mb-6 md:mb-0">
+                    <img src="https://i.postimg.cc/fyL859n0/472004557-958020379582441-8585343648080228898-n.jpg" alt="Profile picture of Khan Bahadur Sadi" class="profile-pic w-40 h-40 mb-6 md:mb-0 floating">
                     <p class="text-lg text-white leading-relaxed">
                         I am MD Khan Bahadur Sadi, currently pursuing a Bachelor's degree in Computer Science and Engineering. With a strong interest in Software development, I'm focused on solving real-world problems through technology. I'm also passionate about Machine Learning and AI-integrated solutions. My academic and personal journey reflects a drive for continuous growth and innovation in the tech field.
                     </p>
                 </div>
             </section>
             
-            <section class="card p-8 rounded-2xl mb-12 fade-in-up" style="animation-delay: 0.2s;">
+            <section id="personal-info" class="card p-8 rounded-2xl mb-12 slide-in-left parallax-item">
                 <h2 class="text-4xl font-bold text-cyan-300 mb-6 section-title">Personal Information</h2>
                 <div class="space-y-4 text-lg text-white">
                     <p><span class="text-blue-300 font-semibold">Full Name:</span> Md Khan Bahadur Sadi</p>
@@ -247,7 +437,7 @@
                 </div>
             </section>
             
-            <section class="card p-8 rounded-2xl mb-12 fade-in-up" style="animation-delay: 0.4s;">
+            <section id="education" class="card p-8 rounded-2xl mb-12 bounce-in parallax-item">
                 <h2 class="text-4xl font-bold text-lime-300 mb-6 section-title">Education</h2>
                 <div class="overflow-x-auto">
                     <table class="w-full bg-blue-800 rounded-lg overflow-hidden">
@@ -287,11 +477,10 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Navigation active state management
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section, header');
             
-            // Set up intersection observer for scroll-based navigation highlighting
+            // Intersection Observer for scroll animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -316,7 +505,7 @@
             const canvas = document.getElementById('background-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
-            const numParticles = 30;
+            const numParticles = 40;
             
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
@@ -327,9 +516,9 @@
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.3;
-                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
                     this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
                 }
                 
@@ -366,8 +555,8 @@
                         const dy = particles[a].y - particles[b].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (distance < 100) {
-                            const opacity = 1 - distance / 100;
+                        if (distance < 150) {
+                            const opacity = 1 - distance / 150;
                             ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.2})`;
                             ctx.lineWidth = 0.5;
                             ctx.beginPath();
