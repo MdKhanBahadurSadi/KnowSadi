@@ -1,8 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Khan Bahadur Sadi</title>
+    <title>Khan Bahadur Sadi - Software Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -10,26 +11,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></link>
     <style>
         :root {
-            --primary-color: #3b82f6;
-            --secondary-color: #60a5fa;
-            --accent-color: #fbbf24;
-            --text-color-light: #e2e8f0;
-            --text-color-dark: #1a202c;
-            --bg-dark: #111827;
-            --bg-light: #1e293b;
-            --card-bg: #334155;
+            --primary-color: #4f46e5;
+            --secondary-color: #3b82f6;
+            --accent-color: #fcd34d;
+            --text-color-light: #e0e7ff;
+            --bg-deep: #0f172a;
+            --bg-medium: #1e293b;
+            --card-bg: rgba(30, 41, 59, 0.7);
         }
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #581c87 100%);
+            background: radial-gradient(circle at top left, #1e3a8a 0%, #1e293b 80%);
             color: var(--text-color-light);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             position: relative;
-            z-index: 0;
         }
-        
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            z-index: 50;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--accent-color));
+            width: 0%;
+            transition: width 0.1s linear;
+        }
         #background-canvas {
             position: fixed;
             top: 0;
@@ -38,431 +50,284 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.7;
+            opacity: 0.5;
         }
-        
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 1rem;
             position: relative;
             z-index: 1;
         }
-        
         .nav-link {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 9999px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             color: var(--text-color-light);
             font-weight: 500;
             position: relative;
-            overflow: hidden;
         }
-        
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .nav-link:hover::before {
-            left: 100%;
-        }
-        
         .nav-link:hover {
-            background-color: rgba(253, 224, 71, 0.2);
             color: var(--accent-color);
+            background-color: rgba(252, 211, 77, 0.1);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
-        
         .nav-link.active {
-            background-color: var(--accent-color);
-            color: var(--text-color-dark);
-            box-shadow: 0 10px 30px rgba(253, 224, 71, 0.4);
-            transform: translateY(-2px);
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.5);
+            font-weight: 600;
+            transform: translateY(-1px);
         }
-        
         .card {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.02), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
         .card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
         }
-        
-        .card:hover::before {
-            opacity: 1;
-        }
-        
         .profile-pic {
             border-radius: 50%;
-            border: 4px solid var(--primary-color);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            border: 6px solid var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.5);
+            transition: all 0.5s ease-in-out;
+            object-fit: cover;
         }
-        
-        .profile-pic::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
         .profile-pic:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 0 0 8px rgba(252, 211, 77, 0.5);
         }
-        
-        .profile-pic:hover::after {
-            opacity: 1;
-        }
-        
         .section-title {
             position: relative;
             display: inline-block;
-            padding-bottom: 0.5rem;
+            color: var(--accent-color);
+            padding-bottom: 0.75rem;
         }
-        
         .section-title::after {
             content: "";
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 3px;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            border-radius: 4px;
+            transform-origin: left;
+            animation: underline-grow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
-        
+        @keyframes underline-grow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
         .fade-in-up {
-            animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
         }
-        
         @keyframes fade-in-up {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .scale-in {
-            animation: scale-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes scale-in {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
         .slide-in-left {
-            animation: slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: slide-in-left 0.8s ease-out forwards;
+            opacity: 0;
         }
-        
         @keyframes slide-in-left {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-        
-        .pulse-border {
-            animation: pulse-border 2s infinite;
-        }
-        
-        @keyframes pulse-border {
-            0% {
-                box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(96, 165, 250, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(96, 165, 250, 0);
-            }
-        }
-        
         .rotate-in {
             animation: rotate-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-        
         @keyframes rotate-in {
             from {
                 opacity: 0;
-                transform: rotate(-5deg) scale(0.95);
+                transform: rotate(-1deg) scale(0.98);
             }
             to {
                 opacity: 1;
                 transform: rotate(0deg) scale(1);
             }
         }
-        
-        .bounce-in {
-            animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
-        }
-        
-        @keyframes bounce-in {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        .wave-animation {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .wave-animation::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
-            border-radius: 50% 50% 0 0;
-            animation: wave 3s ease-in-out infinite;
-        }
-        
-        @keyframes wave {
-            0%, 100% {
-                transform: translateX(-100%) scaleX(0.5);
-            }
-            50% {
-                transform: translateX(0%) scaleX(1);
-            }
-        }
-        
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            background: linear-gradient(135deg, #a5b4fc, #9333ea, #fcd34d);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradient-shift 3s ease-in-out infinite alternate;
         }
-        
-        @keyframes gradient-shift {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-            100% {
-                filter: hue-rotate(30deg);
-            }
-        }
-        
-        .typing-effect {
+        .hero-subtitle {
+            display: inline-block;
+            font-weight: 400;
+            color: var(--text-color-light);
+            opacity: 0.8;
             overflow: hidden;
             border-right: 3px solid var(--accent-color);
             white-space: nowrap;
-            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+            margin: 0 auto;
+            animation: typing 3s steps(44, end) 1s forwards, blink-caret 0.75s step-end infinite;
+            width: 0;
         }
-        
         @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
+            from { width: 0 }
+            to { width: 100% }
         }
-        
         @keyframes blink-caret {
-            from, to {
-                border-color: transparent;
-            }
-            50% {
-                border-color: var(--accent-color);
-            }
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color) }
         }
-        
+        .education-table th, .education-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .education-table tr:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+        }
         .floating {
             animation: floating 6s ease-in-out infinite;
         }
-        
         @keyframes floating {
             0%, 100% {
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
-        }
-        
-        .glow-on-hover {
-            transition: all 0.3s;
-        }
-        
-        .glow-on-hover:hover {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-        
-        .parallax {
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        
-        .parallax-item {
-            transform: rotateX(15deg) rotateZ(-5deg);
-            transition: transform 0.5s;
-        }
-        
-        .parallax-item:hover {
-            transform: rotateX(0deg) rotateZ(0deg);
-        }
-        
-        .progress-bar {
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-            width: 0%;
-            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
+    <div id="scroll-progress">
+        <div class="progress-bar"></div>
+    </div>
     <canvas id="background-canvas"></canvas>
     
     <div class="container mx-auto p-4 md:p-8 flex-grow">
-        <nav class="flex justify-center items-center py-6 mb-8 rounded-full px-6 bg-blue-800 bg-opacity-70 backdrop-blur-md shadow-lg wave-animation">
-            <ul class="flex space-x-2 sm:space-x-4 flex-wrap justify-center">
-                <li><a href="index.html" class="nav-link glow-on-hover">
-                    <i class="fas fa-home"></i>
-                    <span>About Sadi</span>
+        <nav class="flex justify-center items-center py-4 mb-10 rounded-xl px-4 bg-bg-medium bg-opacity-90 backdrop-blur-xl shadow-2xl sticky top-4 z-40 transition-all duration-300" id="main-nav">
+            <ul class="flex space-x-1 sm:space-x-3 flex-wrap justify-center text-sm md:text-base">
+                <li><a href="index.html" class="nav-link active" data-id="about">
+                    <i class="fas fa-id-card"></i>
+                    <span>About</span>
                 </a></li>
-                <li><a href="preferences.html" class="nav-link glow-on-hover">
+                <li><a href="preferences.html" class="nav-link" data-id="personal-info">
                     <i class="fas fa-user-cog"></i>
-                    <span>Personal Preference</span>
+                    <span>Personal Info</span>
                 </a></li>
-                <li><a href="skills.html" class="nav-link glow-on-hover">
-                    <i class="fas fa-code"></i>
-                    <span>Skills</span>
+                <li><a href="skills.html" class="nav-link" data-id="education">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Education</span>
                 </a></li>
-                <li><a href="projects.html" class="nav-link glow-on-hover">
+                <li><a href="projects.html" class="nav-link" data-id="projects">
                     <i class="fas fa-project-diagram"></i>
                     <span>Projects</span>
                 </a></li>
-                <li><a href="contact.html" class="nav-link glow-on-hover">
+                <li><a href="contact.html" class="nav-link" data-id="contact">
                     <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a></li>
             </ul>
         </nav>
         
-        <header class="text-center py-16 px-4 rounded-xl shadow-2xl bg-gradient-to-br from-blue-700 to-indigo-700 mb-12 parallax">
-            <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-4 gradient-text">Khan Bahadur Sadi</h1>
-            <p class="text-xl md:text-2xl text-blue-200 mb-8 typing-effect">Software Developer & Future Software Engineer</p>
+        <header class="text-center py-16 px-4 rounded-3xl shadow-3xl bg-gradient-to-br from-indigo-800/80 to-blue-900/80 mb-16 rotate-in">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-white leading-tight mb-4 tracking-tight">
+                <span class="gradient-text">Khan Bahadur Sadi</span>
+            </h1>
+            <p class="text-xl md:text-3xl text-indigo-200">
+                <span class="hero-subtitle">Software Developer | Future Software Engineer</span>
+            </p>
         </header>
         
-        <main>
-            <section id="about" class="card p-8 rounded-2xl mb-12 fade-in-up parallax-item">
-                <h2 class="text-4xl font-bold text-yellow-300 mb-6 section-title">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center md:space-x-8">
-                    <img src="https://i.postimg.cc/fyL859n0/472004557-958020379582441-8585343648080228898-n.jpg" alt="Profile picture of Khan Bahadur Sadi" class="profile-pic w-40 h-40 mb-6 md:mb-0 floating">
-                    <p class="text-lg text-white leading-relaxed">
-                        I am MD Khan Bahadur Sadi, currently pursuing a Bachelor's degree in Computer Science and Engineering. With a strong interest in Software development, I'm focused on solving real-world problems through technology. I'm also passionate about Machine Learning and AI-integrated solutions. My academic and personal journey reflects a drive for continuous growth and innovation in the tech field.
+        <main class="space-y-16">
+            
+            <section id="about" class="card p-8 md:p-12 rounded-3xl fade-in-up" data-delay="0.2">
+                <h2 class="text-4xl font-bold mb-8 section-title">Profile Summary</h2>
+                <div class="flex flex-col lg:flex-row items-start lg:space-x-12">
+                    <img src="https://i.postimg.cc/fyL859n0/472004557-958020379582441-8585343648080228898-n.jpg" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/4f46e5/e0e7ff?text=Sadi+KB';"
+                         alt="Profile picture of Khan Bahadur Sadi" 
+                         class="profile-pic w-48 h-48 mb-8 mx-auto lg:mx-0 lg:mb-0 shadow-xl floating">
+                    <div class="text-lg text-white/90 space-y-4">
+                        <p class="text-2xl font-semibold text-accent-color/90 mb-4">MD Khan Bahadur Sadi</p>
+                        <p>
+                            I am a dedicated **Software Developer** currently pursuing a Bachelor's degree in **Computer Science and Engineering (CSE)**. My core focus lies in developing robust and scalable software solutions aimed at solving tangible, real-world problems.
+                        </p>
+                        <p>
+                            I possess a strong foundation in modern software development methodologies and a deep interest in emerging fields, particularly **Machine Learning and AI-integrated systems**. My academic journey at North Western University, Khulna, fuels a commitment to continuous growth, innovation, and mastering the technologies required to shape the future of tech.
+                        </p>
+                        <div class="pt-4">
+                            <a href="contact.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-bg-deep bg-accent-color hover:bg-yellow-400 transition duration-300">
+                                <i class="fas fa-handshake mr-3"></i> Connect with me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="personal-info" class="card p-8 md:p-12 rounded-3xl slide-in-left" data-delay="0.4">
+                <h2 class="text-4xl font-bold text-cyan-400 mb-8 section-title">Personal Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6 text-lg text-white/90">
+                    <p>
+                        <i class="fas fa-user-alt text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Full Name:</span> Md Khan Bahadur Sadi
+                    </p>
+                    <p>
+                        <i class="fas fa-birthday-cake text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Date of Birth:</span> 15/06/2005 (NID)
+                    </p>
+                    <p class="md:col-span-2">
+                        <i class="fas fa-map-marker-alt text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Address:</span> 28, Motiakhali Main Road Shipyard, Khulna
+                    </p>
+                    <p>
+                        <i class="fas fa-flag text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Nationality:</span> Bangladeshi
+                    </p>
+                    <p>
+                        <i class="fas fa-tint text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Blood Group:</span> B+
+                    </p>
+                    <p>
+                        <i class="fas fa-male text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Gender:</span> Male
+                    </p>
+                    <p>
+                        <i class="fas fa-mosque text-blue-400 mr-3"></i>
+                        <span class="font-semibold">Religion:</span> Islam
                     </p>
                 </div>
             </section>
             
-            <section id="personal-info" class="card p-8 rounded-2xl mb-12 slide-in-left parallax-item">
-                <h2 class="text-4xl font-bold text-cyan-300 mb-6 section-title">Personal Information</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p><span class="text-blue-300 font-semibold">Full Name:</span> Md Khan Bahadur Sadi</p>
-                    <p><span class="text-blue-300 font-semibold">Father's Name:</span> Md Rafiqul Alam Khan</p>
-                    <p><span class="text-blue-300 font-semibold">Mother's Name:</span> Mst Kazal Rakha</p>
-                    <p><span class="text-blue-300 font-semibold">Date of Birth:</span> 15/6/2005 (According to NID)</p>
-                    <p><span class="text-blue-300 font-semibold">Gender:</span> Male</p>
-                    <p><span class="text-blue-300 font-semibold">Nationality:</span> Bangladeshi</p>
-                    <p><span class="text-blue-300 font-semibold">Religion:</span> Islam</p>
-                    <p><span class="text-blue-300 font-semibold">Blood Group:</span> B+</p>
-                    <p><span class="text-blue-300 font-semibold">Current Address:</span> 28, Motiakhali Main Road Shipyard, Khulna</p>
-                    <p><span class="text-blue-300 font-semibold">Permanent Address:</span> 28, Motiakhali Main Road Shipyard, Khulna</p>
-                </div>
-            </section>
-            
-            <section id="education" class="card p-8 rounded-2xl mb-12 bounce-in parallax-item">
-                <h2 class="text-4xl font-bold text-lime-300 mb-6 section-title">Education</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full bg-blue-800 rounded-lg overflow-hidden">
-                        <thead>
+            <section id="education" class="card p-8 md:p-12 rounded-3xl fade-in-up" data-delay="0.6">
+                <h2 class="text-4xl font-bold text-green-400 mb-8 section-title">Academic History</h2>
+                <div class="overflow-x-auto shadow-xl rounded-xl">
+                    <table class="w-full text-left education-table">
+                        <thead class="bg-primary-color/90 text-white/90 uppercase text-sm">
                             <tr>
-                                <th class="py-3 px-4 text-left">Degree</th>
-                                <th class="py-3 px-4 text-left">Institution</th>
-                                <th class="py-3 px-4 text-left">Year</th>
+                                <th class="py-4 px-6 min-w-[150px]">Degree / Examination</th>
+                                <th class="py-4 px-6 min-w-[200px]">Institution / Board</th>
+                                <th class="py-4 px-6 min-w-[100px]">Year / Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="py-3 px-4">BSc in CSE</td>
-                                <td class="py-3 px-4">North Western University, Khulna</td>
-                                <td class="py-3 px-4">Running</td>
+                        <tbody class="divide-y divide-white/10">
+                            <tr class="bg-bg-medium/70 transition duration-300">
+                                <td class="py-4 px-6 font-medium text-accent-color">BSc in CSE</td>
+                                <td class="py-4 px-6">North Western University, Khulna</td>
+                                <td class="py-4 px-6 text-green-300 font-semibold">Running</td>
                             </tr>
-                            <tr>
-                                <td class="py-3 px-4">HSC in Science</td>
-                                <td class="py-3 px-4">Jessore Board</td>
-                                <td class="py-3 px-4">2022</td>
+                            <tr class="bg-bg-medium/70 transition duration-300">
+                                <td class="py-4 px-6 font-medium">HSC in Science</td>
+                                <td class="py-4 px-6">Jessore Board</td>
+                                <td class="py-4 px-6">2022</td>
                             </tr>
-                            <tr>
-                                <td class="py-3 px-4">SSC in Science</td>
-                                <td class="py-3 px-4">Jessore Board</td>
-                                <td class="py-3 px-4">2020</td>
+                            <tr class="bg-bg-medium/70 transition duration-300">
+                                <td class="py-4 px-6 font-medium">SSC in Science</td>
+                                <td class="py-4 px-6">Jessore Board</td>
+                                <td class="py-4 px-6">2020</td>
                             </tr>
                         </tbody>
                     </table>
@@ -471,37 +336,52 @@
         </main>
     </div>
     
-    <footer class="text-center py-6 mt-12 bg-gray-900 text-gray-400 border-t border-gray-700">
-        <p>&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
+    <footer class="text-center py-6 mt-16 bg-bg-medium border-t border-white/10">
+        <p class="text-sm text-gray-400">&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
     </footer>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section, header');
+            const sections = document.querySelectorAll('section');
+            const progressBar = document.querySelector('.progress-bar');
             
-            // Intersection Observer for scroll animations
+            function updateScrollProgress() {
+                const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = (window.scrollY / totalHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            }
+
+            window.addEventListener('scroll', updateScrollProgress);
+            window.addEventListener('resize', updateScrollProgress);
+            updateScrollProgress();
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-10% 0px -60% 0px',
+                threshold: 0.1 
+            };
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    const targetId = entry.target.id;
+                    const correspondingLink = document.querySelector(`.nav-link[data-id="${targetId}"]`);
+                    
                     if (entry.isIntersecting) {
                         navLinks.forEach(link => link.classList.remove('active'));
-                        const correspondingLink = document.querySelector(`[href="#${entry.target.id}"]`);
                         if (correspondingLink) {
                             correspondingLink.classList.add('active');
                         }
+                        const delay = parseFloat(entry.target.getAttribute('data-delay') || 0);
+                        entry.target.style.animationDelay = `${delay}s`;
                     }
                 });
-            }, {
-                threshold: 0.5
-            });
+            }, observerOptions);
             
             sections.forEach(section => {
-                if (section.id) {
-                    observer.observe(section);
-                }
+                observer.observe(section);
             });
             
-            // Background canvas animation
             const canvas = document.getElementById('background-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
@@ -516,10 +396,12 @@
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.speedY = (Math.random() - 0.5) * 0.5;
-                    this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    const hue = Math.floor(Math.random() * 40) + 210;
+                    const lightness = Math.floor(Math.random() * 20) + 70;
+                    this.color = `hsl(${hue}, 80%, ${lightness}%)`;
                 }
                 
                 update() {
@@ -555,9 +437,9 @@
                         const dy = particles[a].y - particles[b].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
-                        if (distance < 150) {
-                            const opacity = 1 - distance / 150;
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.2})`;
+                        if (distance < 120) {
+                            const opacity = 1 - distance / 120;
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
                             ctx.lineWidth = 0.5;
                             ctx.beginPath();
                             ctx.moveTo(particles[a].x, particles[a].y);
