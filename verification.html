@@ -3,498 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Human Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-green: #28a745;
-            --dark-green: #218838;
-            --primary-red: #dc3545;
-            --dark-red: #c82333;
-            --text-dark: #2c3e50;
-            --text-light: #6c757d;
-            --bg-light: #f8f9fa;
-            --bg-dark: #343a40;
-            --card-bg: #ffffff;
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-        }
-
         body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg-light);
-            margin: 0;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Inter', sans-serif;
         }
-
-        .main-heading {
-            color: var(--text-dark);
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 40px;
-            text-align: center;
-            position: absolute;
-            top: 50px;
-            width: 100%;
-            letter-spacing: 0.05em;
-            z-index: 10;
-        }
-
-        .container {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px var(--shadow-medium);
-            text-align: center;
-            transition: opacity 0.5s ease-in-out;
-            max-width: 600px;
-            width: 90%;
-            margin-top: 120px;
-            border: 1px solid #e0e0e0;
-            position: relative;
-            z-index: 20;
-        }
-
-        .verification-image {
-            max-width: 220px;
-            height: auto;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow-light);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            object-fit: cover;
-        }
-
-        .verification-image:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        h1 {
-            color: var(--text-dark);
-            margin-bottom: 35px;
-            font-size: 2.2em;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-        }
-
-        .buttons button {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.15em;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 12px var(--shadow-light);
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-        }
-
-        .buttons button:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.4);
-        }
-
-        .buttons button.yes {
-            background-color: var(--primary-green);
-            color: white;
-        }
-
-        .buttons button.yes:hover {
-            background-color: var(--dark-green);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        .buttons button.no {
-            background-color: var(--primary-red);
-            color: white;
-        }
-
-        .buttons button.no:hover {
-            background-color: var(--dark-red);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
-        }
-
-        .full-screen-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0s linear 0.5s;
-            z-index: 1000;
-            font-weight: 700;
-        }
-
-        .full-screen-message.show {
-            opacity: 1;
-            visibility: visible;
-            transition-delay: 0s;
-        }
-
-        .full-screen-message.error {
-            background-color: rgba(34, 49, 63, 0.98);
-        }
-
-        .full-screen-message.success {
-            background-color: rgba(40, 167, 69, 0.98);
-        }
-
-        .full-screen-message .icon {
-            font-size: 6em;
-            margin-bottom: 30px;
-            animation: bounceIn 0.8s ease-out;
-        }
-
-        .full-screen-message .text {
-            font-size: 0.8em;
-            margin-top: 20px;
-            max-width: 70%;
-            line-height: 1.5;
-            font-weight: 400;
+        
+        .bg-forest {
+            background-image: url('https://a-z-animals.com/media/2022/12/shutterstock_1975087202.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         @keyframes bounceIn {
-            0% {
-                transform: scale(0.3);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes floatAndFade {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-15px) scale(1.03); opacity: 0.9; }
+            100% { transform: translateY(0) scale(1); opacity: 0.8; }
         }
 
         .circle-decoration {
-            position: absolute;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 5;
             animation: floatAndFade 10s ease-in-out infinite alternate;
         }
 
-        .circle-decoration img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .circle-1 {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            left: 8%;
-            animation-delay: 0s;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .circle-2 {
-            width: 90px;
-            height: 90px;
-            top: 25%;
-            right: 10%;
-            animation-delay: 2s;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .circle-3 {
-            width: 150px;
-            height: 150px;
-            bottom: 10%;
-            left: 12%;
-            animation-delay: 4s;
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-
-        .circle-4 {
-            width:  100px;
-            height: 100px;
-            bottom: 40%;
-            right: 8%;
-            animation-delay: 1s;
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .circle-5 {
-            width: 110px;
-            height: 110px;
-            top: 25%;
-            right: 20%;
-            animation-delay: 3s;
-            background-color: rgba(255, 255, 255, 0.75);
-        }
-
-        .circle-6 {
-            width: 80px;
-            height: 80px;
-            bottom: 5%;
-            left: 35%;
-            animation-delay: 5s;
-            background-color: rgba(255, 255, 255, 0.85);
-        }
-
-        .circle-7 {
-            width: 70px;
-            height: 70px;
-            top: 40%;
-            left: 5%;
-            animation-delay: 6s;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .circle-8 {
-            width: 100px;
-            height: 100px;
-            top: 60%;
-            right: 2%;
-            animation-delay: 7s;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .circle-10 {
-            width: 110px;
-            height: 110px;
-            bottom: 15%;
-            left: 45%;
-            animation-delay: 9s;
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .circle-11 {
-            width: 95px;
-            height: 95px;
-            top: 20%;
-            left: 2%;
-            animation-delay: 10s;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .circle-12 {
-            width: 125px;
-            height: 125px;
-            bottom: 25%;
-            right: 15%;
-            animation-delay: 11s;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-
-        @keyframes floatAndFade {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(-15px) scale(1.03);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 0.8;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .circle-1 {
-                width: 70px;
-                height: 70px;
-                top: 8%;
-                left: 5%;
-            }
-            .circle-2 {
-                width: 50px;
-                height: 50px;
-                top: 20%;
-                right: 5%;
-            }
-            .circle-3 {
-                width: 80px;
-                height: 80px;
-                bottom: 8%;
-                left: 8%;
-            }
-            .circle-4 {
-                width: 60px;
-                height: 60px;
-                bottom: 15%;
-                right: 5%;
-            }
-            .circle-5 {
-                width: 70px;
-                height: 70px;
-                top: 3%;
-                right: 15%;
-            }
-            .circle-6 {
-                width: 50px;
-                height: 50px;
-                bottom: 3%;
-                left: 30%;
-            }
-            .circle-7 {
-                width: 40px;
-                height: 40px;
-                top: 35%;
-                left: 2%;
-            }
-            .circle-8 {
-                width: 60px;
-                height: 60px;
-                top: 55%;
-                right: 1%;
-            }
-            .circle-10 {
-                width: 60px;
-                height: 60px;
-                bottom: 10%;
-                left: 40%;
-            }
-            .circle-11 {
-                width: 50px;
-                height: 50px;
-                top: 18%;
-                left: 1%;
-            }
-            .circle-12 {
-                width: 70px;
-                height: 70px;
-                bottom: 22%;
-                right: 10%;
-            }
-
-            .main-heading {
-                font-size: 1.8em;
-                top: 30px;
-            }
-            .container {
-                padding: 30px;
-                margin-top: 100px;
-            }
-            h1 {
-                font-size: 1.8em;
-            }
-            .buttons button {
-                padding: 12px 25px;
-                font-size: 1em;
-            }
-            .full-screen-message {
-                font-size: 2em;
-            }
-            .full-screen-message .icon {
-                font-size: 4em;
-            }
-            .full-screen-message .text {
-                font-size: 0.7em;
-            }
+        .full-screen-message .icon {
+            animation: bounceIn 0.8s ease-out;
         }
     </style>
 </head>
-<body>
-    <h2 class="main-heading">Verify You are a Human</h2>
-
-        </div>
-    <div class="circle-decoration circle-2">
-        <img src="https://th.bing.com/th/id/OIP.5qDo6I2z1Wk1MgaT4GgYXAHaEK?w=296&h=180&c=7&r=0&o=7&dpr=1.8&pid=1.7&rm=3" alt="[বৃত্ত সাজসজ্জার ছবি ২]">
-    </div>
-    <div class="circle-decoration circle-3">
-        <img src="https://video.cgtn.com/news/2023-11-03/UN-experts-Palestinians-are-at-grave-risk-of-genocide--1oqLmSlqR5S/video/2069079b9bed433392c55d3a3d15c0b2/2069079b9bed433392c55d3a3d15c0b2-1280.jpg" alt="[বৃত্ত সাজসজ্জার ছবি ৩]">
-    </div>
-    <div class="circle-decoration circle-4">
-        <img src="https://static01.nyt.com/images/2023/10/26/multimedia/26gaza-deathtoll-01-clkv/26gaza-deathtoll-01-clkv-videoSixteenByNine3000.jpg?year=2023&h=1689&w=3000&s=2b25dfa5b086f00f77f7bfeda39a207cda38e4ce1e867608293b6bdc4ae6c9e9&k=ZQJBKqZ0VN&tw=1" alt="[বৃত্ত সাজসজ্জার ছবি ৪]">
+<body class="bg-forest relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
+    <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
     
-    </div>
-    <div class="circle-decoration circle-6">
-        <img src="https://assets.change.org/photos/8/py/hj/ztpYhJcFHeZLqDQ-1600x900-noPad.jpg?1698923192" alt="[বৃত্ত সাজসজ্জার ছবি ৬]">
-    </div>
-    <div class="circle-decoration circle-7">
-        <img src="https://tse2.mm.bing.net/th/id/OIP.eI_9GjASqn7QOlSA0lR_4AAAAA?r=0&rs=1&pid=ImgDetMain&cb=idpwebpc2" alt="[বৃত্ত সাজসজ্জার ছবি ৭]">
-    </div>
-    <div class="circle-decoration circle-8">
-        <img src="https://th.bing.com/th/id/R.8b28d7bb2ce7db53058bb2b38759754a?rik=UNzMB%2bCQ3p38Ow&pid=ImgRaw&r=0" alt="[বৃত্ত সাজসজ্জার ছবি ৮]">
-    </div>
-    <div class="circle-decoration circle-10">
-        <img src="https://muslimnews.co.uk/assets/Palestine-Father-of-Mervan-Berbah-13-shot-dead-Israeli-forces-fire-Gaza-border-demo-European-Hosp-morgue-Khan-Yunis-10-oct-15-pho-Ali-Hassan-AA-1.jpg" alt="[বৃত্ত সাজসজ্জার ছবি ১০]">
-    </div>
-    <div class="circle-decoration circle-11">
-        <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1H7bCd.img?w=768&h=502&m=6" alt="[বৃত্ত সাজসজ্জার ছবি ১১]">
-    </div>
-    <div class="circle-decoration circle-12">
-        <img src="https://media.rnztools.nz/rnz/image/upload/s--dFv28hs2--/ar_16:10,c_fill,f_auto,g_auto,q_auto,w_1050/v1698369632/4L0HADK_child_jpg" alt="[বৃত্ত সাজসজ্জার ছবি ১২]">
-    </div>
+    <div class="circle-decoration absolute w-24 h-24 rounded-full bg-white/10 top-1/4 left-1/4" style="animation-delay: 1s;"></div>
+    <div class="circle-decoration absolute w-20 h-20 rounded-full bg-white/10 top-1/2 left-3/4" style="animation-delay: 3s;"></div>
+    <div class="circle-decoration absolute w-28 h-28 rounded-full bg-white/10 bottom-1/4 right-1/4" style="animation-delay: 5s;"></div>
+    <div class="circle-decoration absolute w-16 h-16 rounded-full bg-white/10 top-1/3 right-1/3" style="animation-delay: 7s;"></div>
+    <div class="circle-decoration absolute w-24 h-24 rounded-full bg-white/10 bottom-1/3 left-1/2" style="animation-delay: 9s;"></div>
 
-    <div class="container" id="mainContainer">
-        <img src="https://th.bing.com/th/id/OIP.yTFthDScPIOQkBpquLSRJAHaEK?r=0&rs=1&pid=ImgDetMain&cb=idpwebpc2" alt="Palestine Solidarity" class="verification-image">
-        <h1>Are you standing with Palestine?</h1>
-        <div class="buttons">
-            <button id="yesButton" class="yes">Yes</button>
-            <button id="noButton" class="no">No</button>
+    <h2 class="relative z-20 text-white font-extrabold text-4xl sm:text-5xl text-center mb-8 top-12 sm:top-24">
+        Verify You Are Human
+    </h2>
+
+    <div id="mainContainer" class="relative z-10 w-full max-w-md bg-white bg-opacity-90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-2xl transition-all duration-500 flex flex-col items-center">
+        <img src="https://th.bing.com/th/id/OIP.yTFthDScPIOQkBpquLSRJAHaEK?r=0&rs=1&pid=ImgDetMain&cb=idpwebpc2" alt="Palestine Solidarity" class="verification-image w-48 sm:w-60 h-auto rounded-lg shadow-md mb-6 transition-transform duration-300 hover:scale-105">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">Are you standing with Palestine?</h1>
+        <div class="buttons flex justify-center gap-4 w-full">
+            <button id="yesButton" class="yes flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 shadow-lg transform hover:scale-105 active:scale-95">Yes</button>
+            <button id="noButton" class="no flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 shadow-lg transform hover:scale-105 active:scale-95">No</button>
         </div>
     </div>
-    <div id="successMessageFullScreen" class="full-screen-message success">
-        <span class="icon">&#10004;</span>
-        <span class="text">Verification Successful!</span>
-        <span class="text">Redirecting you now...</span>
+    
+    <div id="successMessageFullScreen" class="fixed inset-0 flex flex-col items-center justify-center p-4 text-white text-center transition-opacity duration-500 opacity-0 invisible z-50 bg-green-500 bg-opacity-90">
+        <span class="icon text-6xl mb-4">&#10004;</span>
+        <span class="text text-2xl font-bold">Verification Successful!</span>
+        <span class="text text-lg mt-2">Redirecting you now...</span>
     </div>
-    <div id="errorMessageFullScreen" class="full-screen-message error">
-        <span class="icon">&#10060;</span>
-        <span class="text">Sorry, Only humans are allowed to view the Bio-data.</span>
-        <span class="text">Please try again if you are a human.</span>
+    
+    <div id="errorMessageFullScreen" class="fixed inset-0 flex flex-col items-center justify-center p-4 text-white text-center transition-opacity duration-500 opacity-0 invisible z-50 bg-gray-900 bg-opacity-90">
+        <span class="icon text-6xl mb-4">&#10060;</span>
+        <span class="text text-2xl font-bold">Sorry, Only humans are allowed to use the system.</span>
+        <span class="text text-lg mt-2">Please try again if you are a human.</span>
     </div>
+
     <script>
         document.getElementById('yesButton').addEventListener('click', function() {
-            document.getElementById('errorMessageFullScreen').classList.remove('show');
-            document.getElementById('mainContainer').style.opacity = '0';
-            document.getElementById('mainContainer').style.pointerEvents = 'none';
+            const mainContainer = document.getElementById('mainContainer');
+            const errorMessage = document.getElementById('errorMessageFullScreen');
+            const successMessage = document.getElementById('successMessageFullScreen');
+
+            errorMessage.classList.remove('show', 'visible', 'opacity-100');
+            errorMessage.classList.add('invisible', 'opacity-0');
+            
+            mainContainer.classList.add('scale-95', 'opacity-0');
+            
             setTimeout(() => {
-                document.getElementById('mainContainer').style.display = 'none';
-                document.getElementById('successMessageFullScreen').classList.add('show');
+                mainContainer.classList.add('hidden');
+                successMessage.classList.remove('invisible', 'opacity-0');
+                successMessage.classList.add('visible', 'opacity-100');
+
                 setTimeout(function() {
-                    window.location.href = 'home.html';
+                    window.location.href = "home.html";
                 }, 1500);
             }, 500);
         });
 
         document.getElementById('noButton').addEventListener('click', function() {
-            document.getElementById('successMessageFullScreen').classList.remove('show');
-            document.getElementById('mainContainer').style.opacity = '0';
-            document.getElementById('mainContainer').style.pointerEvents = 'none';
+            const mainContainer = document.getElementById('mainContainer');
+            const successMessage = document.getElementById('successMessageFullScreen');
+            const errorMessage = document.getElementById('errorMessageFullScreen');
+
+            successMessage.classList.remove('show', 'visible', 'opacity-100');
+            successMessage.classList.add('invisible', 'opacity-0');
+
+            mainContainer.classList.add('scale-95', 'opacity-0');
+
             setTimeout(() => {
-                document.getElementById('mainContainer').style.display = 'none';
-                document.getElementById('errorMessageFullScreen').classList.add('show');
+                mainContainer.classList.add('hidden');
+                errorMessage.classList.remove('invisible', 'opacity-0');
+                errorMessage.classList.add('visible', 'opacity-100');
             }, 500);
         });
     </script>
