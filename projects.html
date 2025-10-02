@@ -6,375 +6,439 @@
     <title>Projects - Khan Bahadur Sadi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></link>
     <style>
-        :root{
-            --primary-color:#3b82f6;
-            --secondary-color:#60a5fa;
-            --accent-color:#fde047;
-            --text-color-light:#e2e8f0;
-            --text-color-dark:#1a202c;
-            --bg-dark:#1e293b;
-            --bg-light:#334155;
-            --card-bg:#475569;
-            --project-nwu-bg: rgba(79, 70, 229, 0.8);
-            --project-nwu-heading: #fde047;
-            --project-nwu-border: #60a5fa;
-            --project-nwu-strong: #93c5fd;
-            --project-helo-bg: rgba(109, 40, 217, 0.8);
-            --project-helo-heading: #67e8f9;
-            --project-helo-border: #c084fc;
-            --project-helo-strong: #d8b4fe;
-            --project-hydrovigil-bg: rgba(30, 27, 76, 0.8);
-            --project-hydrovigil-heading: #bef264;
-            --project-hydrovigil-border: #4ade80;
-            --project-hydrovigil-strong: #bef264;
-            --project-hydrovigil-app-bg: rgba(13, 148, 136, 0.8);
-            --project-hydrovigil-app-heading: #fbbf24;
-            --project-hydrovigil-app-border: #facc15;
-            --project-hydrovigil-app-strong: #fbbf24;
-            --project-ghorbondhu-bg: rgba(185, 28, 28, 0.8);
-            --project-ghorbondhu-heading: #fde047;
-            --project-ghorbondhu-border: #f87171;
-            --project-ghorbondhu-strong: #fca5a5;
-            --project-ghorbondhu-web-bg: rgba(146, 64, 14, 0.8);
-            --project-ghorbondhu-web-heading: #93c5fd;
-            --project-ghorbondhu-web-border: #facc15;
-            --project-ghorbondhu-web-strong: #93c5fd;
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #3b82f6;
+            --accent-color: #fcd34d;
+            --text-color-light: #e0e7ff;
+            --bg-deep: #0f172a;
+            --bg-medium: #1e293b;
+            --card-bg: rgba(30, 41, 59, 0.7);
         }
-        html{font-family:'Inter',sans-serif;scroll-behavior:smooth;}
-        body{background-color:var(--bg-dark);color:var(--text-color-light);line-height:1.6;overflow-x:hidden;@apply bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen flex flex-col;position:relative;z-index:0;}
-        #background-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;opacity:0.8;filter:blur(0.5px);}
-        .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-        @keyframes slideInLeft{from{opacity:0;transform:translateX(-50px);}to{opacity:1;transform:translateX(0);}}
-        @keyframes pulseBorder{0%{box-shadow:0 0 0 0 rgba(96,165,250,0.4);}70%{box-shadow:0 0 0 10px rgba(96,165,250,0);}100%{box-shadow:0 0 0 0 rgba(96,165,250,0);}}
-        @keyframes scaleIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-        .animate-fadeIn{animation:fadeIn 1s ease-out forwards;}
-        .animate-slideInLeft{animation:slideInLeft 0.8s ease-out forwards;}
-        .animate-pulseBorder{animation:pulseBorder 2s infinite;}
-        .animate-scaleIn{animation:scaleIn 0.7s ease-out forwards;}
-        .animate-slideUp{animation:slideUp 0.6s ease-out forwards;}
-        nav ul li a{position:relative;display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border-radius:9999px;transition:all 0.3s ease-in-out;color:var(--text-color-light);font-weight:500;}
-        nav ul li a .nav-icon{width:1.25em;height:1.25em;fill:currentColor;transition:fill 0.3s ease-in-out;}
-        nav ul li a:hover{background-color:rgba(253,224,71,0.2);color:var(--accent-color);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
-        nav ul li a.active{background-color:var(--accent-color);color:var(--text-color-dark);box-shadow:0 6px 20px rgba(253,224,71,0.4);transform:translateY(-2px);}
-        nav ul li a.active .nav-icon{fill:var(--text-color-dark);}
-        nav ul li a::after{content:none;}
-        .profile-pic:hover{transform:scale(1.05) rotate(2deg);box-shadow:0 10px 20px rgba(0,0,0,0.2);}
-        .card:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.3);}
-        @media (max-width:767px){nav{flex-direction:column;align-items:center;padding-top:1rem;padding-bottom:1rem;}nav ul{margin-top:1rem;flex-wrap:wrap;justify-content:center;}nav ul li{margin:0.5rem 0.75rem;}nav ul li a{padding:0.5rem 1rem;}}
-
-        .project-image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            
+            background: radial-gradient(circle at top left, #1e3a8a 0%, #1e293b 80%);
+            color: var(--text-color-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
         }
-        .project-image-grid img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
+        
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease-in-out;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            color: var(--text-color-light);
+            font-weight: 500;
+            position: relative;
         }
-        .project-image-grid img:hover {
+        
+        .nav-link:hover {
+            color: var(--accent-color);
+            background-color: rgba(252, 211, 77, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.5);
+            font-weight: 600;
+            transform: translateY(-1px);
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card {
+            border-top: 5px solid transparent;
+            border-image: linear-gradient(90deg, var(--primary-color), var(--accent-color)) 1;
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover {
+            border-image: linear-gradient(90deg, var(--accent-color), var(--secondary-color)) 1;
             transform: scale(1.02);
         }
 
-        #project-nwu-my-class { background-color: var(--project-nwu-bg); }
-        #project-nwu-my-class h2 { color: var(--project-nwu-heading); border-color: var(--project-nwu-border); }
-        #project-nwu-my-class strong { color: var(--project-nwu-strong); }
+        .limitation-list li::marker {
+            content: '⚠️ ';
+            color: #fca5a5;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--bg-deep);
+            background-color: var(--accent-color);
+        }
 
-        #project-helo-apa { background-color: var(--project-helo-bg); }
-        #project-helo-apa h2 { color: var(--project-helo-heading); border-color: var(--project-helo-border); }
-        #project-helo-apa strong { color: var(--project-helo-strong); }
+        .tech-tag.java { background-color: #dc3939; color: white; }
+        .tech-tag.flutter { background-color: #0288d1; color: white; }
+        .tech-tag.iot { background-color: #2ecc71; color: white; }
+        .tech-tag.web { background-color: #f1c40f; color: var(--bg-deep); }
 
-        #project-hydrovigil { background-color: var(--project-hydrovigil-bg); }
-        #project-hydrovigil h2 { color: var(--project-hydrovigil-heading); border-color: var(--project-hydrovigil-border); }
-        #project-hydrovigil strong { color: var(--project-hydrovigil-strong); }
 
-        #project-hydrovigil-app { background-color: var(--project-hydrovigil-app-bg); }
-        #project-hydrovigil-app h2 { color: var(--project-hydrovigil-app-heading); border-color: var(--project-hydrovigil-app-border); }
-        #project-hydrovigil-app strong { color: var(--project-hydrovigil-app-strong); }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            color: var(--accent-color);
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            border-radius: 4px;
+            transform-origin: left;
+            animation: underline-grow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        @keyframes underline-grow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        .fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-left {
+            animation: slide-in-left 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slide-in-left {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-        #project-ghorbondhu { background-color: var(--project-ghorbondhu-bg); }
-        #project-ghorbondhu h2 { color: var(--project-ghorbondhu-heading); border-color: var(--project-ghorbondhu-border); }
-        #project-ghorbondhu strong { color: var(--project-ghorbondhu-strong); }
-
-        #project-ghorbondhu-website { background-color: var(--project-ghorbondhu-web-bg); }
-        #project-ghorbondhu-website h2 { color: var(--project-ghorbondhu-web-heading); border-color: var(--project-ghorbondhu-web-border); }
-        #project-ghorbondhu-website strong { color: var(--project-ghorbondhu-web-strong); }
+        .gradient-text {
+            background: linear-gradient(135deg, #a5b4fc, #9333ea, #fcd34d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
     </style>
 </head>
 <body>
     <canvas id="background-canvas"></canvas>
+    
     <div class="container mx-auto p-4 md:p-8 flex-grow">
-        <nav class="flex justify-center items-center py-6 mb-8 rounded-full px-6 bg-blue-800 bg-opacity-70 backdrop-blur-md shadow-lg animate-slideUp">
-            <ul class="flex space-x-2 sm:space-x-4 flex-wrap justify-center">
-                <li><a href="home.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.38 0 2.5 1.12 2.5 2.5S13.38 10.5 12 10.5 9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM12 19.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.88 6-3.88s5.97 1.89 6 3.88c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                    <span>About Sadi</span>
+        <nav class="flex justify-center items-center py-4 mb-10 rounded-xl px-4 bg-bg-medium bg-opacity-90 backdrop-blur-xl shadow-2xl sticky top-4 z-40 transition-all duration-300" id="main-nav">
+            <ul class="flex space-x-1 sm:space-x-3 flex-wrap justify-center text-sm md:text-base">
+                <li><a href="home.html" class="nav-link" data-id="about">
+                    <i class="fas fa-id-card"></i>
+                    <span>About</span>
                 </a></li>
-                <li><a href="preferences.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.09-.76-1.72-1.06l-.42-2.61c-.04-.24-.24-.42-.48-.42h-4c-.24 0-.43.18-.47.42l-.42 2.61c-.63.3-1.2.66-1.72 1.06l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.09.76 1.72 1.06l.42 2.61c.04.24.24.42.48.42h4c.24 0 .43-.18.47-.42l.42-2.61c.63-.3 1.2-.66 1.72-1.06l2.49 1c.22.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
-                    <span>Personal Preference</span>
+                <li><a href="preferences.html" class="nav-link" data-id="personal-info">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Personal Preferences</span>
                 </a></li>
-                <li><a href="skills.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.79z"/></svg>
+                <li><a href="skills.html" class="nav-link" data-id="education">
+                    <i class="fas fa-graduation-cap"></i>
                     <span>Skills</span>
                 </a></li>
-                <li><a href="projects.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                <li><a href="projects.html" class="nav-link active" data-id="projects">
+                    <i class="fas fa-project-diagram"></i>
                     <span>Projects</span>
                 </a></li>
-                <li><a href="contact.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <li><a href="contact.html" class="nav-link" data-id="contact">
+                    <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a></li>
             </ul>
         </nav>
 
-        <header id="projects-hero" class="hero text-center py-20 px-4 rounded-xl shadow-2xl bg-gradient-to-br from-indigo-700 to-blue-700 mb-12 animate-slideUp">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">My Projects</h1>
-            <p class="subtitle text-xl md:text-2xl text-indigo-200 mb-8">Showcasing a selection of my work and personal endeavors.</p>
+        <header class="text-center py-16 px-4 rounded-3xl shadow-3xl bg-gradient-to-br from-blue-800/80 to-teal-900/80 mb-16 fade-in-up" data-delay="0.2">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-white leading-tight mb-4 tracking-tight">
+                <span class="gradient-text">My Portfolio of Work</span>
+            </h1>
+            <p class="text-xl md:text-3xl text-blue-200">
+                Showcasing a selection of my work and personal endeavors.
+            </p>
         </header>
 
-        <main>
-            <section id="project-nwu-my-class" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">NWU My Class</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p><strong class="font-bold">Project Idea:</strong> Md Mahmudul Haque</p>
-                    <p><strong class="font-bold">Project Type:</strong> Class Management Android App</p>
-                    <p><strong class="font-bold">Project Purpose:</strong> Software Development (CSE-2200) Course</p>
-                    <p><strong class="font-bold">Technology Used:</strong> Java</p>
-                    <p><strong class="font-bold">Limitations:</strong> No Database</p>
+        <main class="space-y-12">
+            
+            <section id="featured-projects" class="card p-8 md:p-12 rounded-3xl slide-in-left" data-delay="0.4">
+                <h2 class="text-4xl font-bold mb-10 section-title">Featured Projects</h2>
+                
+                <div class="space-y-10">
+                    
+                    <div class="project-card p-6 rounded-xl bg-bg-medium shadow-xl hover:shadow-2xl transition duration-500 hover:border-l-8 border-yellow-400">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fas fa-mobile-alt text-4xl text-yellow-400"></i>
+                            <h3 class="text-3xl font-bold text-yellow-300">GhorBondhu – Local Service Booking App</h3>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">"GhorBondhu" is a user-friendly mobile application created to connect people within a community by making local service booking easier, faster, and more organized.</p>
+                        
+                        <div class="mb-4">
+                            <span class="tech-tag flutter"><i class="fas fa-mobile-alt mr-1"></i> Flutter / Dart</span>
+                            <span class="tech-tag iot" style="background-color: #f7931e;"><i class="fas fa-database mr-1"></i> Firebase</span>
+                        </div>
+
+                        <ul class="list-disc list-inside space-y-2 text-gray-200 pl-4">
+                            <li><strong class="text-white">Secure Login System:</strong> Email/Password authentication with **Email Verification** for a trusted user base.</li>
+                            <li><strong class="text-white">Dynamic Newsfeed:</strong> Real-time feed to browse services, including title, description, price, and contact info.</li>
+                            <li><strong class="text-white">Service Posting Form:</strong> Allows any user to easily post a service they are offering.</li>
+                            <li><strong class="text-white">Order Now Feature:</strong> Instant request mechanism for a smooth and interactive booking process.</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-green-400 font-semibold">✅ Status: MVP completed, includes splash screen, auth system, and live data loading.</p>
+                    </div>
+
+                    <div class="project-card p-6 rounded-xl bg-bg-medium shadow-xl hover:shadow-2xl transition duration-500 hover:border-l-8 border-yellow-400">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fas fa-globe text-4xl text-yellow-400"></i>
+                            <h3 class="text-3xl font-bold text-yellow-300">GhorBondhu Website – Digital Service Platform</h3>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">The web version of the GhorBondhu app, a responsive platform to help people find or offer everyday services within their community.</p>
+                        
+                        <div class="mb-4">
+                            <span class="tech-tag web"><i class="fab fa-html5 mr-1"></i> HTML</span>
+                            <span class="tech-tag web"><i class="fab fa-css3-alt mr-1"></i> CSS</span>
+                            <span class="tech-tag web"><i class="fab fa-php mr-1"></i> PHP</span>
+                        </div>
+
+                        <ul class="list-disc list-inside space-y-2 text-gray-200 pl-4">
+                            <li><strong class="text-white">Email Login with Verification:</strong> Secure sign-up and login process.</li>
+                            <li><strong class="text-white">Live Newsfeed of Services:</strong> Homepage displays real-time service posts.</li>
+                            <li><strong class="text-white">Responsive Design:</strong> Works smoothly on desktop and mobile devices.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
+            
+            <section id="academic-projects" class="card p-8 md:p-12 rounded-3xl fade-in-up" data-delay="0.6">
+                <h2 class="text-4xl font-bold mb-10 section-title">Academic & Utility Projects </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <div class="project-card p-6 rounded-xl bg-bg-medium shadow-lg hover:shadow-xl transition duration-500 hover:border-l-8 border-green-500">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <i class="fas fa-tint text-3xl text-green-400"></i>
+                            <h3 class="text-2xl font-semibold text-green-300">HydroVigil: IoT Water Level Monitor</h3>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-3">Project Purpose: Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
 
-            <section id="project-helo-apa" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">Helo Apa</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p><strong class="font-bold">Project Idea:</strong> Sheikh Hasina</p>
-                    <p><strong class="font-bold">Project Type:</strong> Audio Calling App</p>
-                    <p><strong class="font-bold">Project Purpose:</strong> Practice</p>
-                    <p><strong class="font-bold">Technology Used:</strong> Java, Firebase</p>
-                    <p><strong class="font-bold">Limitations:</strong> Database is too small</p>
-                </div>
-            </section>
+                        <div class="mb-4">
+                            <span class="tech-tag iot"><i class="fas fa-microchip mr-1"></i> ESP8266</span>
+                            <span class="tech-tag iot"><i class="fas fa-broadcast-tower mr-1"></i> HC-SR04 Sensor</span>
+                        </div>
 
-            <section id="project-hydrovigil" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">HydroVigil</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p><strong class="font-bold">Project Idea:</strong> Md Khan Bahadur Sadi</p>
-                    <p><strong class="font-bold">Project Type:</strong> IoT-based Water Level Monitoring System</p>
-                    <p><strong class="font-bold">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
-                    <p><strong class="font-bold">Technology Used:</strong> ESP8266, HC-SR04 Ultrasonic Sensor</p>
-                    <p><strong class="font-bold">Limitations:</strong></p>
-                    <ul class="list-disc pl-5">
-                        <li>Sensor Accuracy: The HC-SR04 ultrasonic sensor may not provide accurate readings in environments with turbulence or foam on the water surface.</li>
-                        <li>Limited Range: The ultrasonic sensor has a limited measuring range (typically 2 cm to 400 cm), which may not be suitable for monitoring very deep or large water reservoirs.</li>
-                        <li>Wi-Fi Dependency: The ESP8266 module relies on a stable Wi-Fi connection to send notifications. In areas with poor connectivity, data transmission may fail.</li>
-                        <li>Environmental Sensitivity: Extreme weather conditions, such as high humidity or temperature fluctuations, can affect sensor performance.</li>
-                        <li>Maintenance Requirements: Regular maintenance is needed to clean the sensor and ensure proper operation, especially in outdoor or harsh environments.</li>
-                        <li>Data Security: Without encryption, transmitted data may be vulnerable to interception or tampering.</li>
-                        <li>Scalability Challenges: Adding more sensors or integrating with other systems may require significant adjustments to hardware and software.</li>
-                        <li>Limited Battery Life: If battery-powered, the system may require frequent recharging or battery replacement, reducing its practicality for long-term use.</li>
-                        <li>Interference Issues: Nearby objects or obstacles may cause signal reflections, leading to inaccurate distance measurements.</li>
-                    </ul>
-                </div>
-            </section>
+                        <h4 class="text-lg font-bold text-red-300 mb-2">Limitations:</h4>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1 limitation-list">
+                            <li>Sensor Accuracy (Turbulence/Foam)</li>
+                            <li>Limited Range (2cm to 400cm)</li>
+                            <li>Wi-Fi Dependency for notifications</li>
+                            <li>Data Security (Lack of Encryption)</li>
+                            <li>Scalability Challenges</li>
+                        </ul>
+                    </div>
 
-            <section id="project-hydrovigil-app" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">HydroVigil App</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p><strong class="font-bold">Project Idea:</strong> Khan Bahadur Sadi</p>
-                    <p><strong class="font-bold">Project Type:</strong> IoT-based Water Level Monitoring System Data Showing App</p>
-                    <p><strong class="font-bold">Project Purpose:</strong> Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
-                    <p><strong class="font-bold">Technology Used:</strong> Java, Firebase</p>
-                    <p><strong class="font-bold">Limitations:</strong> Totally IoT-based</p>
-                </div>
-            </section>
+                    <div class="project-card p-6 rounded-xl bg-bg-medium shadow-lg hover:shadow-xl transition duration-500 hover:border-l-8 border-green-500">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <i class="fas fa-tablet-alt text-3xl text-green-400"></i>
+                            <h3 class="text-2xl font-semibold text-green-300">HydroVigil App: Data Viewer</h3>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-3">Project Purpose: Microprocessor and Microcontroller Laboratory (CSE-3102) Course</p>
 
-            <section id="project-ghorbondhu" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">GhorBondhu – A Local Service Booking App for Your Neighborhood</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p>"GhorBondhu" is a user-friendly mobile application created to connect people within a community by making local service booking easier, faster, and more organized. Designed and developed by Muhammad Khan Bahadur Sadi, this app helps users both post and request household or personal services — like electricians, tutors, cleaners, or any skilled help — directly from their smartphones.</p>
-                    <p><strong class="font-bold">Secure Login System:</strong> Users can register or log in using their email and password. Email verification is implemented for extra security, ensuring a trusted user base.</p>
-                    <p><strong class="font-bold">Dynamic Newsfeed:</strong> After logging in, users are greeted with a real-time newsfeed where they can browse available services posted by others. Each service post includes details like service title, description, price, and the poster’s contact info.</p>
-                    <p><strong class="font-bold">Service Posting Form:</strong> Any user can fill out a simple form to post a service they’re offering — turning the app into a platform for earning and networking within the local area.</p>
-                    <p><strong class="font-bold">Order Now Feature:</strong> Interested users can click on the “Order Now” button to request a service instantly, making the process smooth and interactive.</p>
-                    <p><strong class="font-bold">Built using:</strong> Flutter and connected to Firebase, the MVP version of GhorBondhu already includes a splash screen, authentication system, verified sign-ups, and live data loading from Firebase. The app reflects your vision of making local service-sharing simple and trusted — just like a “home-friend” (Ghor Bondhu) would be.</p>
-                </div>
-            </section>
+                        <div class="mb-4">
+                            <span class="tech-tag java"><i class="fab fa-java mr-1"></i> Java</span>
+                            <span class="tech-tag iot" style="background-color: #f7931e;"><i class="fas fa-database mr-1"></i> Firebase</span>
+                        </div>
 
-            <section id="project-ghorbondhu-website" class="card p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold mb-6 border-b-2 pb-3">GhorBondhu Website – The Digital Platform for Local Services</h2>
-                <div class="space-y-4 text-lg text-white">
-                    <p>The GhorBondhu Website is a modern, user-friendly web platform designed to make local service exchange simple, fast, and reliable. It is the web version of the GhorBondhu mobile app, aimed at helping people find or offer everyday services within their community — all from the comfort of their home.</p>
-                    <p><strong class="font-bold">Email Login with Verification:</strong> Users can sign up or log in using their email and password. A verification system is in place to ensure user authenticity and security.</p>
-                    <p><strong class="font-bold">Live Newsfeed of Services:</strong> The homepage features a real-time newsfeed where users can browse service posts submitted by others. Each post includes details like service name, description, price, and an option to order.</p>
-                    <p><strong class="font-bold">Service Posting Form:</strong> Any user can easily fill out a form to post a service they are offering — making it ideal for freelancers, students, or local workers to showcase their skills.</p>
-                    <p><strong class="font-bold">“Order Now” Button:</strong> Each service post includes an "Order Now" button that allows interested users to directly place a request for the service.</p>
-                    <p><strong class="font-bold">Responsive Web Design:</strong> Built using HTML, CSS, and PHP, the website is fully responsive — meaning it works smoothly on both desktop and mobile devices.</p>
-                    <p class="text-yellow-300 font-semibold">✅ GhorBondhu – Where your next helping hand might be just a neighbor away.</p>
-                    <p>This website is a step toward building a trustworthy, community-driven digital network where people can support and rely on each other for everyday needs.</p>
+                        <p class="text-gray-400 text-sm mt-2">A dedicated mobile application to display the real-time data collected by the HydroVigil IoT system.</p>
+                        <h4 class="text-lg font-bold text-red-300 mt-3 mb-1">Limitation:</h4>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1 limitation-list">
+                            <li>Totally IoT-based dependency.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card p-6 rounded-xl bg-bg-medium shadow-lg hover:shadow-xl transition duration-500 hover:border-l-8 border-red-500">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <i class="fas fa-chalkboard-teacher text-3xl text-red-400"></i>
+                            <h3 class="text-2xl font-semibold text-red-300">NWU My Class: Class Management</h3>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-3">Project Purpose: Software Development (CSE-2200) Course</p>
+
+                        <div class="mb-4">
+                            <span class="tech-tag java"><i class="fab fa-java mr-1"></i> Java</span>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mt-2">An Android application for managing class-related information and activities.</p>
+                        <h4 class="text-lg font-bold text-red-300 mt-3 mb-1">Limitation:</h4>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1 limitation-list">
+                            <li>No external database was used.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card p-6 rounded-xl bg-bg-medium shadow-lg hover:shadow-xl transition duration-500 hover:border-l-8 border-red-500">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <i class="fas fa-phone-alt text-3xl text-red-400"></i>
+                            <h3 class="text-2xl font-semibold text-red-300">Helo Apa: Audio Calling App </h3>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-3">Project Purpose: Personal Practice</p>
+
+                        <div class="mb-4">
+                            <span class="tech-tag java"><i class="fab fa-java mr-1"></i> Java</span>
+                            <span class="tech-tag iot" style="background-color: #f7931e;"><i class="fas fa-database mr-1"></i> Firebase</span>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mt-2">An application developed to practice building a functional audio calling feature.</p>
+                        <h4 class="text-lg font-bold text-red-300 mt-3 mb-1">Limitation:</h4>
+                        <ul class="list-disc list-inside text-gray-400 text-sm space-y-1 limitation-list">
+                            <li>Database size is too small for a production environment.</li>
+                        </ul>
+                    </div>
+                    
                 </div>
             </section>
         </main>
     </div>
-
-    <footer class="text-center py-6 mt-12 bg-gray-900 text-gray-400 border-t border-gray-700">
-        <p>&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
+    
+    <footer class="text-center py-6 mt-16 bg-bg-medium border-t border-white/10">
+        <p class="text-sm text-gray-400">&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
     </footer>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('nav ul li a');
             const sections = document.querySelectorAll('section, header');
-
-            const currentPage = window.location.pathname.split('/').pop();
-
-            navLinks.forEach(link => {
-                const linkHref = link.getAttribute('href');
-
-                if (linkHref.endsWith('.html')) {
-                    if (linkHref === currentPage || (currentPage === '' && linkHref === 'home.html')) {
-                        link.classList.add('active');
-                    }
-                } else {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href').substring(1);
-                        const targetSection = document.getElementById(targetId);
-
-                        if (targetSection) {
-                            window.scrollTo({
-                                top: targetSection.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                        }
-                        navLinks.forEach(nav => nav.classList.remove('active'));
-                        this.classList.add('active');
-                    });
-                }
-            });
-
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.5
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
             };
-
-            const observer = new IntersectionObserver((entries) => {
+            
+            const animationObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            if (!link.getAttribute('href').endsWith('.html')) {
-                                link.classList.remove('active');
-                                if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                    link.classList.add('active');
-                                }
-                            }
-                        });
+                        entry.target.style.opacity = 1;
+                        entry.target.style.animationDelay = `${parseFloat(entry.target.getAttribute('data-delay') || 0)}s`;
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
             sections.forEach(section => {
-                if (section.id && !Array.from(navLinks).some(link => link.getAttribute('href').includes(section.id + '.html'))) {
-                    observer.observe(section);
-                }
+                animationObserver.observe(section);
             });
 
-            if (window.location.hash) {
-                const initialHash = window.location.hash.substring(1);
-                const initialLink = document.querySelector(`nav ul li a[href="#${initialHash}"]`);
-                if (initialLink) {
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    initialLink.classList.add('active');
-                }
-            } else if (currentPage === '' || currentPage === 'index.html') {
-                const aboutSadiLink = document.querySelector('nav ul li a[href="index.html"]');
-                if (aboutSadiLink) {
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    aboutSadiLink.classList.add('active');
-                }
-            }
-        });
-
-        window.onload = function() {
             const canvas = document.getElementById('background-canvas');
             const ctx = canvas.getContext('2d');
-
             let particles = [];
-            const numParticles = 35;
-            const particleColors = [
-                'rgba(255, 0, 0, 0.9)', 'rgba(0, 255, 0, 0.9)', 'rgba(0, 0, 255, 0.9)',
-                'rgba(255, 255, 0, 0.9)', 'rgba(0, 255, 255, 0.9)', 'rgba(255, 0, 255, 0.9)',
-                'rgba(255, 128, 0, 0.9)', 'rgba(128, 0, 255, 0.9)', 'rgba(0, 128, 0, 0.9)'
-            ];
-
-            function setCanvasSize() {
+            const numParticles = 40;
+            
+            function resizeCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
-
+            
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.radius = Math.random() * 1.5 + 0.5;
-                    this.baseColor = particleColors[Math.floor(Math.random() * particleColors.length)];
-                    const rgbaMatch = this.baseColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
-                    this.rgbColor = `rgb(${rgbaMatch[1]}, ${rgbaMatch[2]}, ${rgbaMatch[3]})`;
-                    this.velocity = {
-                        x: (Math.random() - 0.5) * 0.3,
-                        y: (Math.random() - 0.5) * 0.3
-                    };
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    const hue = Math.floor(Math.random() * 40) + 210;
+                    const lightness = Math.floor(Math.random() * 20) + 70;
+                    this.color = `hsl(${hue}, 80%, ${lightness}%)`;
                 }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.baseColor;
-                    ctx.shadowBlur = this.radius * 1;
-                    ctx.shadowColor = this.baseColor;
-                    ctx.fill();
-                    ctx.closePath();
-                }
-
+                
                 update() {
-                    this.x += this.velocity.x;
-                    this.y += this.velocity.y;
-
-                    if (this.x < -this.radius) this.x = canvas.width + this.radius;
-                    if (this.x > canvas.width + this.radius) this.x = -this.radius;
-                    if (this.y < -this.radius) this.y = canvas.height + this.radius;
-                    if (this.y > canvas.height + this.radius) this.y = -this.radius;
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    if (this.x > canvas.width) this.x = 0;
+                    else if (this.x < 0) this.x = canvas.width;
+                    
+                    if (this.y > canvas.height) this.y = 0;
+                    else if (this.y < 0) this.y = canvas.height;
+                }
+                
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
                 }
             }
-
+            
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            
             function connectParticles() {
-                const maxDistance = 100;
                 for (let a = 0; a < particles.length; a++) {
                     for (let b = a; b < particles.length; b++) {
                         const dx = particles[a].x - particles[b].x;
                         const dy = particles[a].y - particles[b].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < maxDistance) {
-                            const opacity = (1 - distance / maxDistance) * 0.6;
-                            
-                            const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
-                            gradient.addColorStop(0, `${particles[a].rgbColor}, ${opacity})`);
-                            gradient.addColorStop(1, `${particles[b].rgbColor}, ${opacity})`);
-
-                            ctx.strokeStyle = gradient;
-                            ctx.lineWidth = 0.8;
+                        
+                        if (distance < 120) {
+                            const opacity = 1 - distance / 120;
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                            ctx.lineWidth = 0.5;
                             ctx.beginPath();
                             ctx.moveTo(particles[a].x, particles[a].y);
                             ctx.lineTo(particles[b].x, particles[b].y);
@@ -383,36 +447,28 @@
                     }
                 }
             }
-
+            
             function animate() {
-                requestAnimationFrame(animate);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
                 connectParticles();
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                    particles[i].draw();
-                }
+                requestAnimationFrame(animate);
             }
-
-            function debounce(func, delay) {
-                let timeout;
-                return function(...args) {
-                    const context = this;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(context, args), delay);
-                };
-            }
-
-            setCanvasSize();
+            
+            resizeCanvas();
             initParticles();
             animate();
-
-            window.addEventListener('resize', debounce(() => {
-                setCanvasSize();
+            
+            window.addEventListener('resize', () => {
+                resizeCanvas();
                 initParticles();
-            }, 250));
-        };
+            });
+        });
     </script>
 </body>
 </html>
