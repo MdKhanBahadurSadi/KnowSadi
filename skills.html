@@ -6,34 +6,140 @@
     <title>Skills - Khan Bahadur Sadi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></link>
     <style>
-        :root{--primary-color:#3b82f6;--secondary-color:#60a5fa;--accent-color:#fde047;--text-color-light:#e2e8f0;--text-color-dark:#1a202c;--bg-dark:#1e293b;--bg-light:#334155;--card-bg:#475569;}
-        html{font-family:'Inter',sans-serif;scroll-behavior:smooth;}
-        body{background-color:var(--bg-dark);color:var(--text-color-light);line-height:1.6;overflow-x:hidden;@apply bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen flex flex-col;position:relative;z-index:0;}
-        #background-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;opacity:0.8;filter:blur(0.5px);}
-        .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-        @keyframes slideInLeft{from{opacity:0;transform:translateX(-50px);}to{opacity:1;transform:translateX(0);}}
-        @keyframes pulseBorder{0%{box-shadow:0 0 0 0 rgba(96,165,250,0.4);}70%{box-shadow:0 0 0 10px rgba(96,165,250,0);}100%{box-shadow:0 0 0 0 rgba(96,165,250,0);}}
-        @keyframes scaleIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-        .animate-fadeIn{animation:fadeIn 1s ease-out forwards;}
-        .animate-slideInLeft{animation:slideInLeft 0.8s ease-out forwards;}
-        .animate-pulseBorder{animation:pulseBorder 2s infinite;}
-        .animate-scaleIn{animation:scaleIn 0.7s ease-out forwards;}
-        .animate-slideUp{animation:slideUp 0.6s ease-out forwards;}
-        nav ul li a{position:relative;display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border-radius:9999px;transition:all 0.3s ease-in-out;color:var(--text-color-light);font-weight:500;}
-        nav ul li a .nav-icon{width:1.25em;height:1.25em;fill:currentColor;transition:fill 0.3s ease-in-out;}
-        nav ul li a:hover{background-color:rgba(253,224,71,0.2);color:var(--accent-color);transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,0.2);}
-        nav ul li a.active{background-color:var(--accent-color);color:var(--text-color-dark);box-shadow:0 6px 20px rgba(253,224,71,0.4);transform:translateY(-2px);}
-        nav ul li a.active .nav-icon{fill:var(--text-color-dark);}
-        nav ul li a::after{content:none;}
-        .profile-pic:hover{transform:scale(1.05) rotate(2deg);box-shadow:0 10px 20px rgba(0,0,0,0.2);}
-        .card:hover{transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.3);}
-        @media (max-width:767px){nav{flex-direction:column;align-items:center;padding-top:1rem;padding-bottom:1rem;}nav ul{margin-top:1rem;flex-wrap:wrap;justify-content:center;}nav ul li{margin:0.5rem 0.75rem;}nav ul li a{padding:0.5rem 1rem;}}
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #3b82f6;
+            --accent-color: #fcd34d;
+            --text-color-light: #e0e7ff;
+            --bg-deep: #0f172a;
+            --bg-medium: #1e293b;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #1e3a8a 0%, #1e293b 80%);
+            color: var(--text-color-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            color: var(--text-color-light);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color);
+            background-color: rgba(252, 211, 77, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.5);
+            font-weight: 600;
+            transform: translateY(-1px);
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            color: var(--accent-color);
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            border-radius: 4px;
+            transform-origin: left;
+            animation: underline-grow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        @keyframes underline-grow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        .fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-left {
+            animation: slide-in-left 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slide-in-left {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
+        .gradient-text {
+            background: linear-gradient(135deg, #a5b4fc, #9333ea, #fcd34d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
         .skill-container {
             margin-bottom: 1.5rem;
         }
@@ -45,11 +151,11 @@
             margin-bottom: 0.5rem;
         }
 
-        .progress-bar {
+        .progress-bar-bg {
             width: 100%;
-            background-color: #334155;
+            background-color: var(--bg-medium);
             border-radius: 9999px;
-            height: 1rem;
+            height: 1.25rem;
             overflow: hidden;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
         }
@@ -58,339 +164,356 @@
             height: 100%;
             width: 0%;
             border-radius: 9999px;
-            transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 0.5rem;
-            color: var(--text-color-dark);
+            padding-right: 0.75rem;
+            color: var(--bg-deep);
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: 0.875rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .prog-java { background: linear-gradient(90deg, #3498db, #2980b9); }
+        .prog-kotlin { background: linear-gradient(90deg, #8e44ad, #9b59b6); }
+        .prog-flutter { background: linear-gradient(90deg, #e67e22, #d35400); }
+        .prog-python { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .prog-c { background: linear-gradient(90deg, #2c3e50, #34495e); }
+        .prog-sql { background: linear-gradient(90deg, #f1c40f, #f39c12); }
+        .prog-html { background: linear-gradient(90deg, #e65100, #ff7043); }
+        .prog-css { background: linear-gradient(90deg, #0288d1, #4fc3f7); }
+        .prog-js { background: linear-gradient(90deg, #fbc02d, #ffeb3b); }
+        .prog-tailwind { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-group-card {
+            background: rgba(30, 41, 59, 0.9);
+            border-left: 5px solid var(--primary-color);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.4s ease;
+        }
+
+        .skill-group-card.frontend { border-left-color: #38bdf8; }
+        .skill-group-card.backend { border-left-color: #fcd34d; }
+        .skill-group-card.mobile { border-left-color: #a78bfa; }
+        .skill-group-card.databases { border-left-color: #f87171; }
+
+        .skill-group-card:hover {
+            border-left-width: 10px;
         }
     </style>
 </head>
 <body>
     <canvas id="background-canvas"></canvas>
+    
     <div class="container mx-auto p-4 md:p-8 flex-grow">
-        <nav class="flex justify-center items-center py-6 mb-8 rounded-full px-6 bg-blue-800 bg-opacity-70 backdrop-blur-md shadow-lg animate-slideUp">
-            <ul class="flex space-x-2 sm:space-x-4 flex-wrap justify-center">
-                <li><a href="home.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.38 0 2.5 1.12 2.5 2.5S13.38 10.5 12 10.5 9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM12 19.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.88 6-3.88s5.97 1.89 6 3.88c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                    <span>About Sadi</span>
+        <nav class="flex justify-center items-center py-4 mb-10 rounded-xl px-4 bg-bg-medium bg-opacity-90 backdrop-blur-xl shadow-2xl sticky top-4 z-40 transition-all duration-300" id="main-nav">
+            <ul class="flex space-x-1 sm:space-x-3 flex-wrap justify-center text-sm md:text-base">
+                <li><a href="home.html" class="nav-link" data-id="about">
+                    <i class="fas fa-id-card"></i>
+                    <span>About</span>
                 </a></li>
-                <li><a href="preferences.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.09-.76-1.72-1.06l-.42-2.61c-.04-.24-.24-.42-.48-.42h-4c-.24 0-.43.18-.47.42l-.42 2.61c-.63.3-1.2.66-1.72 1.06l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.09.76 1.72 1.06l.42 2.61c.04.24.24.42.48.42h4c.24 0 .43-.18.47-.42l.42-2.61c.63-.3 1.2-.66 1.72-1.06l2.49 1c.22.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
-                    <span>Personal Preference</span>
+                <li><a href="preferences.html" class="nav-link" data-id="personal-info">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Personal Preferences</span>
                 </a></li>
-                <li><a href="skills.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.79z"/></svg>
+                <li><a href="skills.html" class="nav-link active" data-id="education">
+                    <i class="fas fa-graduation-cap"></i>
                     <span>Skills</span>
                 </a></li>
-                <li><a href="projects.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                <li><a href="projects.html" class="nav-link" data-id="projects">
+                    <i class="fas fa-project-diagram"></i>
                     <span>Projects</span>
                 </a></li>
-                <li><a href="contact.html">
-                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <li><a href="contact.html" class="nav-link" data-id="contact">
+                    <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a></li>
             </ul>
         </nav>
 
-        <header id="skills-hero" class="hero text-center py-20 px-4 rounded-xl shadow-2xl bg-gradient-to-br from-green-700 to-teal-700 mb-12 animate-slideUp">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">My Technical Skills</h1>
-            <p class="subtitle text-xl md:text-2xl text-green-200 mb-8">Showcasing my expertise in various programming languages and technologies.</p>
+        <header class="text-center py-16 px-4 rounded-3xl shadow-3xl bg-gradient-to-br from-purple-800/80 to-blue-900/80 mb-16 fade-in-up" data-delay="0.2">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-white leading-tight mb-4 tracking-tight">
+                <span class="gradient-text">My Technical Toolkit</span>
+            </h1>
+            <p class="text-xl md:text-3xl text-purple-200">
+                The languages, frameworks, and tools powering my software solutions.
+            </p>
         </header>
 
-        <main>
-            <section id="programming-skills" class="card bg-teal-700 bg-opacity-80 p-8 rounded-2xl shadow-xl transform transition-all duration-300 ease-in-out mb-12 animate-slideUp">
-                <h2 class="text-4xl font-bold text-amber-300 mb-6 border-b-2 border-green-400 pb-3">Programming & Development</h2>
-                <div class="space-y-6">
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">Java</div>
-                            <div class="text-lg font-bold text-blue-300"><span id="java-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #3498db;" data-percentage="52" id="java-progress"></div>
-                        </div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">Kotlin</div>
-                            <div class="text-lg font-bold text-purple-300"><span id="kotlin-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #8e44ad;" data-percentage="18" id="kotlin-progress"></div>
-                        </div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">Flutter</div>
-                            <div class="text-lg font-bold text-orange-300"><span id="flutter-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #e67e22;" data-percentage="45" id="flutter-progress"></div>
-                        </div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">Python</div>
-                            <div class="text-lg font-bold text-emerald-300"><span id="python-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #27ae60;" data-percentage="12" id="python-progress"></div>
-                        </div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">C</div>
-                            <div class="text-lg font-bold text-lime-300"><span id="c-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #2ecc71;" data-percentage="82" id="c-progress"></div>
+        <main class="space-y-16">
+            
+            <section id="dev-skills" class="card p-8 md:p-12 rounded-3xl slide-in-left" data-delay="0.4">
+                <h2 class="text-4xl font-bold mb-8 section-title">Core Competencies</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-group-card mobile">
+                        <h3 class="text-2xl font-semibold text-violet-300 mb-6">Programming Languages</h3>
+                        <div class="space-y-4">
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">C</div>
+                                    <div class="text-lg font-bold text-gray-300"><span id="c-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-c" data-percentage="82" id="c-progress">82%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Java</div>
+                                    <div class="text-lg font-bold text-blue-300"><span id="java-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-java" data-percentage="52" id="java-progress">52%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Python</div>
+                                    <div class="text-lg font-bold text-emerald-300"><span id="python-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-python" data-percentage="12" id="python-progress">12%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Dart (Flutter)</div>
+                                    <div class="text-lg font-bold text-orange-300"><span id="flutter-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-flutter" data-percentage="45" id="flutter-progress">45%</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">SQL</div>
-                            <div class="text-lg font-bold text-violet-300"><span id="sql-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #9b59b6;" data-percentage="78" id="sql-progress"></div>
+                    
+                    <div class="skill-group-card frontend">
+                        <h3 class="text-2xl font-semibold text-blue-300 mb-6">Web & Frontend</h3>
+                        <div class="space-y-4">
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">HTML5</div>
+                                    <div class="text-lg font-bold text-orange-300"><span id="html-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-html" data-percentage="90" id="html-progress">90%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">CSS3</div>
+                                    <div class="text-lg font-bold text-cyan-300"><span id="css-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-css" data-percentage="80" id="css-progress">80%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">JavaScript (ES6+)</div>
+                                    <div class="text-lg font-bold text-yellow-300"><span id="js-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-js" data-percentage="75" id="js-progress">75%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Tailwind CSS</div>
+                                    <div class="text-lg font-bold text-teal-300"><span id="tailwind-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-tailwind" data-percentage="85" id="tailwind-progress">85%</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">HTML & CSS</div>
-                            <div class="text-lg font-bold text-yellow-300"><span id="html-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #f39c12;" data-percentage="55" id="html-progress"></div>
+                    
+                    <div class="skill-group-card backend">
+                        <h3 class="text-2xl font-semibold text-yellow-300 mb-6">Mobile & Backend</h3>
+                        <div class="space-y-4">
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Flutter (Mobile)</div>
+                                    <div class="text-lg font-bold text-orange-300"><span id="flutter-mobile-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-flutter" data-percentage="45" id="flutter-mobile-progress">45%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Kotlin (Android)</div>
+                                    <div class="text-lg font-bold text-purple-300"><span id="kotlin-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-kotlin" data-percentage="18" id="kotlin-progress">18%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Express.js</div>
+                                    <div class="text-lg font-bold text-gray-300"><span id="express-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress" style="background-color: #555;" data-percentage="30" id="express-progress">30%</div>
+                                </div>
+                            </div>
+                            <div class="skill-container">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="skill-name">Database (SQL)</div>
+                                    <div class="text-lg font-bold text-red-300"><span id="sql-percentage">0</span>%</div>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress prog-sql" data-percentage="65" id="sql-progress">65%</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">JavaScript</div>
-                            <div class="text-lg font-bold text-blue-300"><span id="css-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #2980b9;" data-percentage="43" id="css-progress"></div>
-                        </div>
-                    </div>
-                    <div class="skill-container">
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="skill-name">Assembly Language</div>
-                            <div class="text-lg font-bold text-red-300"><span id="javascript-percentage">0</span>%</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="background-color: #c0392b;" data-percentage="33" id="javascript-progress"></div>
+
+                    <div class="skill-group-card databases">
+                        <h3 class="text-2xl font-semibold text-red-300 mb-6">Tools & Version Control</h3>
+                        <div class="space-y-4">
+                            <ul class="list-disc list-inside text-lg space-y-2 pl-4">
+                                <li><i class="fab fa-git-alt mr-2 text-red-400"></i> **Git** / **GitHub**</li>
+                                <li><i class="fas fa-terminal mr-2 text-green-400"></i> Command Line (Linux/Bash)</li>
+                                <li><i class="fas fa-bug mr-2 text-yellow-400"></i> Debugging & Testing</li>
+                                <li><i class="fas fa-code mr-2 text-blue-400"></i> VS Code / IntelliJ IDEA</li>
+                                <li><i class="fas fa-database mr-2 text-indigo-400"></i> MySQL / PostgreSQL Basics</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
-
-    <footer class="text-center py-6 mt-12 bg-gray-900 text-gray-400 border-t border-gray-700">
-        <p>&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
+    
+    <footer class="text-center py-6 mt-16 bg-bg-medium border-t border-white/10">
+        <p class="text-sm text-gray-400">&copy; 2025 Khan Bahadur Sadi. All Rights Reserved.</p>
     </footer>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('nav ul li a');
-            const sections = document.querySelectorAll('section, header');
+            const progressBarElements = document.querySelectorAll('.progress');
+            
+            function animateProgressBars() {
+                progressBarElements.forEach(bar => {
+                    const percentage = bar.getAttribute('data-percentage');
+                    const span = document.getElementById(bar.id.replace('-progress', '-percentage'));
+                    
+                    bar.style.width = `${percentage}%`;
 
-            const currentPage = window.location.pathname.split('/').pop();
-
-            navLinks.forEach(link => {
-                const linkHref = link.getAttribute('href');
-
-                if (linkHref.endsWith('.html')) {
-                    if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
-                        link.classList.add('active');
-                    }
-                } else {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href').substring(1);
-                        const targetSection = document.getElementById(targetId);
-
-                        if (targetSection) {
-                            window.scrollTo({
-                                top: targetSection.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
+                    let current = 0;
+                    const increment = percentage / 50;
+                    const interval = setInterval(() => {
+                        current += increment;
+                        if (current >= percentage) {
+                            current = percentage;
+                            clearInterval(interval);
                         }
-                        navLinks.forEach(nav => nav.classList.remove('active'));
-                        this.classList.add('active');
-                    });
-                }
-            });
+                        span.textContent = Math.floor(current);
+                        bar.textContent = `${Math.floor(current)}%`;
+                    }, 20);
+                });
+            }
 
+            const sections = document.querySelectorAll('section, header');
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.5
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
             };
-
-            const observer = new IntersectionObserver((entries) => {
+            
+            const animationObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            if (!link.getAttribute('href').endsWith('.html')) {
-                                link.classList.remove('active');
-                                if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                    link.classList.add('active');
-                                }
-                            }
-                        });
+                        entry.target.style.opacity = 1;
+                        entry.target.style.animationDelay = `${parseFloat(entry.target.getAttribute('data-delay') || 0)}s`;
+                        entry.target.classList.add('animated');
+                        
+                        if (entry.target.id === 'dev-skills') {
+                            animateProgressBars();
+                        }
+
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
             sections.forEach(section => {
-                if (section.id && !Array.from(navLinks).some(link => link.getAttribute('href').includes(section.id + '.html'))) {
-                    observer.observe(section);
-                }
+                animationObserver.observe(section);
             });
 
-            if (window.location.hash) {
-                const initialHash = window.location.hash.substring(1);
-                const initialLink = document.querySelector(`nav ul li a[href="#${initialHash}"]`);
-                if (initialLink) {
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    initialLink.classList.add('active');
-                }
-            } else if (currentPage === '' || currentPage === 'home.html') {
-                const aboutSadiLink = document.querySelector('nav ul li a[href="index.html"]');
-                if (aboutSadiLink) {
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    aboutSadiLink.classList.add('active');
-                }
-            }
 
-            const skillContainers = document.querySelectorAll('.skill-container');
-
-            const progressBarObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    const progressBar = entry.target.querySelector('.progress');
-                    const percentageSpan = entry.target.querySelector('.text-lg span');
-                    const targetPercentage = parseInt(progressBar.dataset.percentage);
-
-                    if (entry.isIntersecting) {
-                        let currentWidth = 0;
-                        let currentTextPercentage = 0;
-
-                        progressBar.style.transition = 'width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                        progressBar.style.width = targetPercentage + '%';
-
-                        const textInterval = setInterval(() => {
-                            if (currentTextPercentage >= targetPercentage) {
-                                clearInterval(textInterval);
-                            } else {
-                                currentTextPercentage++;
-                                percentageSpan.textContent = currentTextPercentage;
-                            }
-                        }, 10);
-                    } else {
-                        progressBar.style.transition = 'none';
-                        progressBar.style.width = '0%';
-                        percentageSpan.textContent = '0';
-                        setTimeout(() => {
-                            progressBar.style.transition = 'width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                        }, 50);
-                    }
-                });
-            }, {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.7
-            });
-
-            skillContainers.forEach(container => {
-                progressBarObserver.observe(container);
-            });
-        });
-
-        window.onload = function() {
             const canvas = document.getElementById('background-canvas');
             const ctx = canvas.getContext('2d');
-
             let particles = [];
-            const numParticles = 35;
-            const particleColors = [
-                'rgba(255, 0, 0, 0.9)',
-                'rgba(0, 255, 0, 0.9)',
-                'rgba(0, 0, 255, 0.9)',
-                'rgba(255, 255, 0, 0.9)',
-                'rgba(0, 255, 255, 0.9)',
-                'rgba(255, 0, 255, 0.9)',
-                'rgba(255, 128, 0, 0.9)',
-                'rgba(128, 0, 255, 0.9)',
-                'rgba(0, 128, 0, 0.9)'
-            ];
-
-            function setCanvasSize() {
+            const numParticles = 40;
+            
+            function resizeCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
-
+            
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.radius = Math.random() * 1.5 + 0.5;
-                    this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
-                    this.velocity = {
-                        x: (Math.random() - 0.5) * 0.3,
-                        y: (Math.random() - 0.5) * 0.3
-                    };
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    const hue = Math.floor(Math.random() * 40) + 210;
+                    const lightness = Math.floor(Math.random() * 20) + 70;
+                    this.color = `hsl(${hue}, 80%, ${lightness}%)`;
                 }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.shadowBlur = this.radius * 1;
-                    ctx.shadowColor = this.color;
-                    ctx.fill();
-                    ctx.closePath();
-                }
-
+                
                 update() {
-                    this.x += this.velocity.x;
-                    this.y += this.velocity.y;
-
-                    if (this.x < 0 - this.radius) this.x = canvas.width + this.radius;
-                    if (this.x > canvas.width + this.radius) this.x = 0 - this.radius;
-                    if (this.y < 0 - this.radius) this.y = canvas.height + this.radius;
-                    if (this.y > canvas.height + this.radius) this.y = 0 - this.radius;
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    if (this.x > canvas.width) this.x = 0;
+                    else if (this.x < 0) this.x = canvas.width;
+                    
+                    if (this.y > canvas.height) this.y = 0;
+                    else if (this.y < 0) this.y = canvas.height;
+                }
+                
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
                 }
             }
-
+            
             function initParticles() {
                 particles = [];
                 for (let i = 0; i < numParticles; i++) {
                     particles.push(new Particle());
                 }
             }
-
+            
             function connectParticles() {
-                const maxDistance = 100;
                 for (let a = 0; a < particles.length; a++) {
                     for (let b = a; b < particles.length; b++) {
                         const dx = particles[a].x - particles[b].x;
                         const dy = particles[a].y - particles[b].y;
                         const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < maxDistance) {
-                            const gradient = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
-                            gradient.addColorStop(0, particles[a].color.replace('0.9', `${(1 - distance / maxDistance) * 0.6}`));
-                            gradient.addColorStop(1, particles[b].color.replace('0.9', `${(1 - distance / maxDistance) * 0.6}`));
-
-                            ctx.strokeStyle = gradient;
-                            ctx.lineWidth = 0.8;
+                        
+                        if (distance < 120) {
+                            const opacity = 1 - distance / 120;
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                            ctx.lineWidth = 0.5;
                             ctx.beginPath();
                             ctx.moveTo(particles[a].x, particles[a].y);
                             ctx.lineTo(particles[b].x, particles[b].y);
@@ -399,27 +522,28 @@
                     }
                 }
             }
-
+            
             function animate() {
-                requestAnimationFrame(animate);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
                 connectParticles();
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                    particles[i].draw();
-                }
+                requestAnimationFrame(animate);
             }
-
-            setCanvasSize();
+            
+            resizeCanvas();
             initParticles();
             animate();
-
+            
             window.addEventListener('resize', () => {
-                setCanvasSize();
+                resizeCanvas();
                 initParticles();
             });
-        };
+        });
     </script>
 </body>
 </html>
